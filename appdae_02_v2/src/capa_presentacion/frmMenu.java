@@ -1,7 +1,6 @@
 package capa_presentacion;
 
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 
 /**
  *

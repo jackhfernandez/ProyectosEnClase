@@ -12,6 +12,9 @@ public class clsUsuario {
     private String tipo;
     private boolean estado;
 
+    // Instancia estatica para gestionar lista de usaurios
+    private static clsListaUsuarios listaUsuarios = new clsListaUsuarios();
+    
     // Constructor por defecto
     public clsUsuario() {
 
@@ -85,16 +88,29 @@ public class clsUsuario {
     }
 
     @Override
-    public String toString() {
+    /*public String toString() {
         
         return "\n\t" + nombre + "\t" + usuario +  "\t" + tipo + "\t" + estado;
+    }*/
+    public String toString() {
+        String estadoTexto = estado ? "Activo" : "Inactivo";
+        return String.format("\n\t%-15s\t%-12s\t%-15s\t%s", 
+                            nombre, usuario, tipo, estadoTexto);
     }
 
+    /**
+     * Verifica inicio sesion
+     * @return 
+     */
     public boolean iniciaSesion() {
-        if (usuario.equals("admin") && clave.equals("5225")) {
-            return true;
-        } else {
-            return false;
-        }
+        return listaUsuarios.verificarUsuario(this.usuario, this.clave);
+    }
+    
+    /**
+     * Obtiene la instancia de la lista de susurios
+     * 
+     */
+    public static clsListaUsuarios getListaUsuarios(){
+        return listaUsuarios;
     }
 }

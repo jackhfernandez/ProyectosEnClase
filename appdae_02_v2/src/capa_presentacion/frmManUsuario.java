@@ -22,6 +22,9 @@ public class frmManUsuario extends javax.swing.JDialog {
         this.setTitle("Registrar usuario by Fernandez");
         this.setResizable(false);
         this.setIconImage(new ImageIcon("src/img/unprg.png").getImage());
+        
+        // MOstrar la lista actual de usuarios al abrir la ventana
+        txtListado.setText(clsUsuario.getListaUsuarios().mostrarListaUsuarios());
     }
 
     /**
@@ -249,20 +252,28 @@ public class frmManUsuario extends javax.swing.JDialog {
                     cboTipo.getSelectedItem().toString(),
                     chkEstado.isSelected());
 
-                // Agregar usuario al listado
-                if (txtListado.getText().isEmpty()) {
-                    txtListado.setText("\n\tLista de Usuarios registrados" + "\n\t"
-                        + "\n\tNombre \tUsuario \tTipo \tEstado"
-                        + objUsu.toString());
+                // Intentar agregar usuario a la lista
+                if (clsUsuario.getListaUsuarios().agregarUsuario(objUsu)) {
+                    // Mostrar la lista actualizada
+                    txtListado.setText(clsUsuario.getListaUsuarios().mostrarListaUsuarios());
+                    
+                    JOptionPane.showMessageDialog(this, "Usuario registrado exitosamente",
+                        "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    
+                    // Limpiar campos
+                    limpiarCampos();
                 } else {
-                    txtListado.append(objUsu.toString());
+                    if (clsUsuario.getListaUsuarios().estaLleno()) {
+                        JOptionPane.showMessageDialog(this, 
+                            "No se puede agregar más usuarios. Lista llena (" + 
+                            clsUsuario.getListaUsuarios().getCapacidadMaxima() + " usuarios máximo)",
+                            "Lista llena", JOptionPane.WARNING_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(this, 
+                            "El usuario ya existe en el sistema",
+                            "Usuario duplicado", JOptionPane.WARNING_MESSAGE);
+                    }
                 }
-
-                //JOptionPane.showMessageDialog(this, "USUARIO registrado en el sistema",
-                //    "Mensaje", JOptionPane.INFORMATION_MESSAGE);
-
-                // Limpiar campos
-                limpiarCampos();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Error al registrar usuario: ", "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -277,6 +288,7 @@ public class frmManUsuario extends javax.swing.JDialog {
         txtNombre.setText("");
         cboTipo.setSelectedIndex(0);
         chkEstado.setSelected(false);
+        txtUsuario.requestFocus(); // Enfocar el primer campo
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
