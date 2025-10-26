@@ -1,0 +1,50 @@
+package capa_datos;
+
+import capa_logica.clsMarca;
+
+/**
+ *
+ * @author Fernandez
+ */
+public class clsMarcaDAO {
+
+    private static clsMarca[] objetos = new clsMarca[20];
+    private static int cantidad;
+
+    public clsMarcaDAO() {
+
+        cantidad = 0;
+    }
+
+    public static int getCantidad() {
+        return cantidad;
+    }
+
+    //public String[] obtener(){
+    //  return objetos[].toString();
+    //}
+    
+    public static int posicion(int codigo){
+        int pos = -1;
+        for (int i = 0; i < cantidad; i++) {
+            if (objetos[i].getCodigo() == codigo) {
+                pos = i;
+                break;
+            } 
+        }
+        return pos;
+    }
+    
+    public static clsMarca getElemento(int codigo) {
+        
+        int pos = posicion(codigo);
+        if (pos!=-1)
+            return objetos[pos];
+        else
+            return null;  
+    }
+    
+    public static void darBaja(int pos){
+        String estado = "Inactivo";
+    }
+}
