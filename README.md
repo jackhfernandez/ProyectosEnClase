@@ -1,28 +1,28 @@
 # 📚 Mira como funciona el proyecto
 
-> ** APPDAE_03:** [appdae_03](./appdae_03) - Sistema de gestion de usuarios con arquitectura MVC
+> **APPDAE_03:** [appdae_03](./appdae_03) - Sistema de gestión de usuarios con arquitectura MVC
 
 ## 🚀 Vista previa
 
 Esta es la interfaz de login:
 
 <div align="center">
-  <img src"./assets/login.png alt="Pantalla de login" width="600">
+  <img src="./assets/login.png" alt="Pantalla de login" width="600">
 </div>
 
-## 🎥 Demostracion en Video
+## 🎥 Demostración en Video
 
 [![Ver video](https://img.shields.io/badge/🎬_Ver_Demo-blue?style=for-the-badge)](https://www.canva.com/design/DAG2isMiGlw/0oGK8KPKYxIDpQCfqVPZug/edit?utm_content=DAG2isMiGlw&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
-## 🎥Estructura del proyecto
+## 🏗️ Estructura del proyecto
 
-###  Cada carpeta es un proyecto y sigue la arquitectura de 3 capas:
-  - 🗃️ ** Capa de Datos **: Acceso a datos con DAO
-  -  ** Capa logica **: Logica de negocio
-  - 🖥 ** Capa presentacion **: Interfaz de usuario con swing
+### Cada carpeta es un proyecto y sigue la arquitectura de 3 capas:
+  - 🗃️ **Capa de Datos**: Acceso a datos con DAO
+  - 🧠 **Capa Lógica**: Lógica de negocio
+  - 🖥️ **Capa Presentación**: Interfaz de usuario con Swing
 
-### Evolucion del proyecto
-appdae_0* es codigo hecho en clase mienstras que appdae_0*_v2 es codigo con metodos adicionales
+### Evolución del proyecto
+appdae_0* es código hecho en clase mientras que appdae_0*_v2 es código con métodos adicionales
 - **[appdae_01](./appdae_01)** - Agregando login
 - **[appdae_02](./appdae_02)** - Agregando funcionalidades
 - **[appdae_02_v2](./appdae_02_v2)** - Mejoras y refactoring
@@ -32,6 +32,8 @@ appdae_0* es codigo hecho en clase mienstras que appdae_0*_v2 es codigo con meto
 
 - ✅ Sistema de autenticación de usuarios
 - ✅ Gestión completa de usuarios (CRUD)
+- ✅ Gestión de marcas
+- ✅ Reportes de usuarios por tipo
 - ✅ Arquitectura MVC bien estructurada
 - ✅ Interfaz gráfica intuitiva con Java Swing
 - ✅ Patrón DAO para acceso a datos
