@@ -22,6 +22,7 @@ public class frmManUsuario extends javax.swing.JDialog {
         initComponents();
         this.setTitle("Registrar usuario by Fernandez");
         this.setIconImage(new ImageIcon("src/img/unprg.png").getImage());
+        listarUsuarios();
     }
 
     /**
@@ -73,6 +74,9 @@ public class frmManUsuario extends javax.swing.JDialog {
 
         jLabel3.setText("Clave");
 
+        txtUsuario.setText("USER");
+
+        txtClave.setText("getbdg");
         txtClave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtClaveActionPerformed(evt);
@@ -109,13 +113,15 @@ public class frmManUsuario extends javax.swing.JDialog {
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(63, 63, 63)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtUsuario)
-                        .addComponent(txtClave)
-                        .addComponent(txtNombre)
-                        .addComponent(cboTipo, 0, 127, Short.MAX_VALUE))
-                    .addComponent(chkEstado))
-                .addContainerGap(115, Short.MAX_VALUE))
+                    .addComponent(txtNombre)
+                    .addComponent(txtUsuario)
+                    .addComponent(txtClave)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(chkEstado))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(33, 33, 33))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                     .addContainerGap(129, Short.MAX_VALUE)
@@ -176,20 +182,20 @@ public class frmManUsuario extends javax.swing.JDialog {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCerrar)
-                    .addComponent(btnGrabar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(59, 59, 59)
+                .addComponent(btnGrabar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addComponent(btnCerrar)
+                .addGap(53, 53, 53))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(btnGrabar)
-                .addGap(43, 43, 43)
-                .addComponent(btnCerrar)
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addGap(47, 47, 47)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCerrar)
+                    .addComponent(btnGrabar))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         txtListado.setColumns(20);
@@ -213,7 +219,8 @@ public class frmManUsuario extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addComponent(jScrollPane1)
         );
 
@@ -250,21 +257,25 @@ public class frmManUsuario extends javax.swing.JDialog {
                     txtNombre.getText().trim(),
                     cboTipo.getSelectedItem().toString(),
                     chkEstado.isSelected());
-                
+
                 clsUsuarioDAO.agregar(objUsu);
 
                 // Agregar usuario al listado
-                if (txtListado.getText().isEmpty()) {
+                /*if (txtListado.getText().isEmpty()) {
                     txtListado.setText("\n\tLista de Usuarios registrados" + "\n\t"
                         + "\n\tNombre \tUsuario \tTipo \tEstado"
                         + objUsu.toString());
                 } else {
                     //txtListado.append(objUsu.toString());
                     listarUsuarios();
-                }
+                }*/
+                txtListado.setText("\n\tLista de Usuarios registrados" + "\n\t"
+                    + "\n\tNombre \tUsuario \tTipo \tEstado"
+                    + objUsu.toString());
+                listarUsuarios();
 
-                //JOptionPane.showMessageDialog(this, "USUARIO registrado en el sistema",
-                //    "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "USUARIO registrado en el sistema",
+                    "Mensaje", JOptionPane.INFORMATION_MESSAGE);
 
                 // Limpiar campos
                 limpiarCampos();
@@ -273,19 +284,20 @@ public class frmManUsuario extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_btnGrabarActionPerformed
-    
+
     // 
-    private void listarUsuarios(){
+    private void listarUsuarios() {
+
         String cadena = "";
         clsUsuario[] datos = clsUsuarioDAO.obtener();
-        int cantidad =clsUsuarioDAO.getCantidad();
+        int cantidad = clsUsuarioDAO.getCantidad();
         for (int i = 0; i < cantidad; i++) {
             clsUsuario clsUsu = datos[i];
             cadena = cadena + clsUsu.toString() + "\n";
         }
         txtListado.setText(cadena);
     }
-    
+
     // Metodo para limpiar campos
     private void limpiarCampos() {
 

@@ -1,5 +1,7 @@
 package capa_logica;
 
+import java.util.Random;
+
 /**
  *
  * @author Fernandez Reyes
@@ -21,10 +23,10 @@ public class clsUsuario {
         this.tipo = "";
         this.estado = false;
     }
-    
+
     // Constructor con parametros
-    public clsUsuario(String usuario, String clave, String nombre, String tipo, boolean estado){
-        
+    public clsUsuario(String usuario, String clave, String nombre, String tipo, boolean estado) {
+
         this.usuario = usuario;
         this.clave = clave;
         this.nombre = nombre;
@@ -86,15 +88,21 @@ public class clsUsuario {
 
     @Override
     public String toString() {
-        
-        return "\n\t" + nombre + "\t" + usuario +  "\t" + tipo + "\t" + estado;
+
+        return "\n\t" + nombre + "\t" + usuario + "\t" + tipo + "\t" + estado;
     }
 
     public boolean iniciaSesion() {
-        if (usuario.equals("admin") && clave.equals("5225")) {
+        if (usuario.equals("admin") && clave.equals("5225"))
             return true;
-        } else {
+         else
             return false;
-        }
+    }
+
+    public int generarAleatorio() {
+
+        Random rand = new Random();
+        int numeroAleatorio = rand.nextInt(100000);
+        return numeroAleatorio;
     }
 }

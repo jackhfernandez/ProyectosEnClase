@@ -1,7 +1,6 @@
 package capa_presentacion;
 
 import capa_logica.clsUsuario;
-import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -11,15 +10,18 @@ import javax.swing.JOptionPane;
  */
 public class jdInicionSesion extends javax.swing.JDialog {
 
+    private int captchaActual;
+
     /**
      * Creates new form jdInicionSesion
+     *
      * @param parent
      * @param modal
      */
     public jdInicionSesion(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        generarYMostrarCaptcha(); // genera el captcha la crear la ventana
+        generarNuevoCaptcha();
         cargarLogo();
     }
 
@@ -40,7 +42,7 @@ public class jdInicionSesion extends javax.swing.JDialog {
         btnSalir = new javax.swing.JButton();
         txtVerificarCaptcha = new javax.swing.JTextField();
         txtCambiar = new javax.swing.JButton();
-        txtCaptcha = new javax.swing.JLabel();
+        lblCaptcha = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtLogo = new javax.swing.JLabel();
 
@@ -91,7 +93,7 @@ public class jdInicionSesion extends javax.swing.JDialog {
             }
         });
 
-        txtCaptcha.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblCaptcha.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         jLabel3.setText("CAPTCHA");
 
@@ -105,7 +107,7 @@ public class jdInicionSesion extends javax.swing.JDialog {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtCaptcha, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblCaptcha, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,7 +146,7 @@ public class jdInicionSesion extends javax.swing.JDialog {
                 .addGap(39, 39, 39)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtCaptcha, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblCaptcha, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtVerificarCaptcha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -170,20 +172,20 @@ public class jdInicionSesion extends javax.swing.JDialog {
         if (!verificarCaptcha()) {
             JOptionPane.showMessageDialog(this, "El captcha ingresado es incorrecto",
                 "Error de Captcha", JOptionPane.ERROR_MESSAGE);
-            generarYMostrarCaptcha();        // Generar nuevo captcha
+            generarNuevoCaptcha();       // Generar nuevo captcha
             txtVerificarCaptcha.setText(""); // Limpiar el campo
             return;
         }
 
         if (objUsuario.iniciaSesion()) {
-            //JOptionPane.showMessageDialog(this, "Usuario correcto", "Mensaje",
-            //    JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Usuario correcto", "Mensaje",
+                JOptionPane.INFORMATION_MESSAGE);
             this.dispose(); // Cerrar la ventana de login
-            
+
         } else {
             JOptionPane.showMessageDialog(this, "No tiene acceso al sistema",
                 "Mensaje", JOptionPane.ERROR_MESSAGE);
-            generarYMostrarCaptcha(); // Vuelve a generar el captcha
+            generarNuevoCaptcha(); // Vuelve a generar el captcha
             txtVerificarCaptcha.setText(""); // Limpiar el campo
         }
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
@@ -193,25 +195,15 @@ public class jdInicionSesion extends javax.swing.JDialog {
         System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    private String numerosAleatorios;
-
-    public String generarNumAleatorios() {
-
-        Random rand = new Random();
-        StringBuilder numeros = new StringBuilder();
-
-        for (int i = 0; i < 5; i++) {
-            int numero = rand.nextInt(10); // Genera números del 0 al 9
-            numeros.append(numero);
-        }
-
-        numerosAleatorios = numeros.toString();
-        return numerosAleatorios;
-    }
-
     public boolean verificarCaptcha() {
-        String captchaIngresado = txtVerificarCaptcha.getText().trim();
-        return captchaIngresado.equals(numerosAleatorios);
+
+        try {
+            String captchaIngresado = txtVerificarCaptcha.getText().trim();
+            int captchaIngresadoInt = Integer.parseInt(captchaIngresado);
+            return captchaIngresadoInt == captchaActual;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     private void txtContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraseñaActionPerformed
@@ -224,36 +216,36 @@ public class jdInicionSesion extends javax.swing.JDialog {
 
   private void txtCambiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCambiarActionPerformed
 
-      generarYMostrarCaptcha();
+      generarNuevoCaptcha();
       txtVerificarCaptcha.setText(""); // Limpiar el campo verificacion
   }//GEN-LAST:event_txtCambiarActionPerformed
+
+    private void generarNuevoCaptcha(){
+        clsUsuario objUsu = new clsUsuario();
+        captchaActual = objUsu.generarAleatorio();
+        lblCaptcha.setText(Integer.toString(captchaActual));
+    }
 
     private void txtVerificarCaptchaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVerificarCaptchaActionPerformed
 
     }//GEN-LAST:event_txtVerificarCaptchaActionPerformed
 
-    private void generarYMostrarCaptcha() {
+    private void cargarLogo() {
 
-        generarNumAleatorios();
-        txtCaptcha.setText(numerosAleatorios);
-    }
-
-    private void cargarLogo(){
-        
-        try {  
+        try {
             // 1. En caso la imagen este en la ruta correcta
             ImageIcon logo = new ImageIcon(getClass().getResource(("/img/isotipo_unprg.png")));
-            
+
             // Redimensionar
             java.awt.Image img = logo.getImage();
             java.awt.Image imgEscalada = img.getScaledInstance(300, 91, java.awt.Image.SCALE_SMOOTH);
             ImageIcon logoEscalado = new ImageIcon(imgEscalada);
             txtLogo.setIcon(logoEscalado);
-            
+
             // Centrar la imagen
             txtLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         } catch (Exception e) {
-            
+
             // 2. En caso no encuentre la imagen
             txtLogo.setText("UNPRG");
             txtLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -266,8 +258,8 @@ public class jdInicionSesion extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel lblCaptcha;
     private javax.swing.JButton txtCambiar;
-    private javax.swing.JLabel txtCaptcha;
     private javax.swing.JPasswordField txtContraseña;
     private javax.swing.JLabel txtLogo;
     private javax.swing.JTextField txtUsuario;

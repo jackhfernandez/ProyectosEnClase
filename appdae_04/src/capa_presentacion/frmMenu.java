@@ -1,7 +1,6 @@
 package capa_presentacion;
 
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 
 /**
  *
@@ -14,9 +13,11 @@ public class frmMenu extends javax.swing.JFrame {
      */
     public frmMenu() {
         initComponents();
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setResizable(false);
         jdInicionSesion objForm = new jdInicionSesion(null, true);
         objForm.setLocationRelativeTo(objForm);
+        this.setLocationRelativeTo(null);
+        objForm.setResizable(false);
         objForm.setTitle("Login by Fernandez");
         this.setTitle("Menu Principal by Fernandez");
         objForm.setIconImage( new ImageIcon("src/img/unprg.png").getImage());
@@ -39,7 +40,7 @@ public class frmMenu extends javax.swing.JFrame {
         mnuSistemaSalir = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         mnuManUsuarios = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        mnuManMarcas = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         mnuRepUsuarios = new javax.swing.JMenuItem();
@@ -69,6 +70,11 @@ public class frmMenu extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Mantenimiento");
+        jMenu2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu2ActionPerformed(evt);
+            }
+        });
 
         mnuManUsuarios.setText("Usuarios");
         mnuManUsuarios.addActionListener(new java.awt.event.ActionListener() {
@@ -78,8 +84,13 @@ public class frmMenu extends javax.swing.JFrame {
         });
         jMenu2.add(mnuManUsuarios);
 
-        jMenuItem1.setText("Marca");
-        jMenu2.add(jMenuItem1);
+        mnuManMarcas.setText("Marcas");
+        mnuManMarcas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuManMarcasActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mnuManMarcas);
 
         jMenuBar1.add(jMenu2);
 
@@ -139,7 +150,17 @@ public class frmMenu extends javax.swing.JFrame {
 
     private void mnuSistemaCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuSistemaCerrarSesionActionPerformed
         
+        // ocultar la ventana de inicio de sesion
+        jdInicionSesion objLogin = new jdInicionSesion(null, true);
+        objLogin.setLocationRelativeTo(null);
+        objLogin.setResizable(false);
+        objLogin.setTitle("Login by Fernandez");
+        objLogin.setIconImage( new ImageIcon("src/img/unprg.png").getImage());
+        objLogin.setVisible(true);
         
+        // en caso el usuario cierre la ventana de login sin autenticarse,
+        // en caso de loguearse correctamente, mostrar nuevamente el menu
+        this.setVisible(true);
     }//GEN-LAST:event_mnuSistemaCerrarSesionActionPerformed
 
     private void mnuRepUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuRepUsuariosActionPerformed
@@ -156,7 +177,17 @@ public class frmMenu extends javax.swing.JFrame {
         objForm.setVisible(true);
     }//GEN-LAST:event_mnuRepUsuariosTipoActionPerformed
 
-    
+    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu2ActionPerformed
+
+    private void mnuManMarcasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuManMarcasActionPerformed
+        
+        frmManMarca objForm = new frmManMarca(this, true);
+        objForm.setLocationRelativeTo(this);
+        objForm.setVisible(true);
+    }//GEN-LAST:event_mnuManMarcasActionPerformed
+  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -164,7 +195,7 @@ public class frmMenu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem mnuManMarcas;
     private javax.swing.JMenuItem mnuManUsuarios;
     private javax.swing.JMenuItem mnuRepUsuarios;
     private javax.swing.JMenuItem mnuRepUsuariosTipo;
