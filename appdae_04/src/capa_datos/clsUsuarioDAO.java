@@ -17,6 +17,7 @@ public class clsUsuarioDAO {
     }
     
     public static void agregar(clsUsuario clsUsu){
+        
         if (cantidad < 20) {
             objetos[cantidad] = clsUsu;
             cantidad++;
@@ -33,17 +34,21 @@ public class clsUsuarioDAO {
     
     public static clsUsuario[] usuariosxTipo(String tipo){
         
+        // obtener los datos por tipo
         int cantReg = 0;
         for (int i = 0; i < cantidad; i++) {
             if (objetos[i].getTipo().equalsIgnoreCase(tipo))
                 cantReg++;
         }
+        
         clsUsuario[] datos = new clsUsuario[cantReg];
         
         int c=0;
         
         for (int i = 0; i < cantidad; i++) {
+            
             if (objetos[i].getTipo().equalsIgnoreCase(tipo)) {
+                
                 datos[c] = objetos[i];
                 c++;
             }

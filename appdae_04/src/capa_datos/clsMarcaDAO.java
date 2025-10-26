@@ -4,7 +4,7 @@ import capa_logica.clsMarca;
 
 /**
  *
- * @author Fernandez
+ * @author Fernandez Reyes
  */
 public class clsMarcaDAO {
 
@@ -16,35 +16,49 @@ public class clsMarcaDAO {
         cantidad = 0;
     }
 
+    public static void agregar(clsMarca objMarca) {
+
+        if (cantidad < 20) {
+            objetos[cantidad] = objMarca;
+            cantidad++;
+        }
+    }
+
+    public static clsMarca[] obtener() {
+        
+        return objetos;
+    }
+
     public static int getCantidad() {
+        
         return cantidad;
     }
 
-    //public String[] obtener(){
-    //  return objetos[].toString();
-    //}
-    
-    public static int posicion(int codigo){
+    public static int posicion(int codigo) {
+        
         int pos = -1;
+        
         for (int i = 0; i < cantidad; i++) {
             if (objetos[i].getCodigo() == codigo) {
                 pos = i;
                 break;
-            } 
+            }
         }
         return pos;
     }
-    
+
     public static clsMarca getElemento(int codigo) {
-        
+
         int pos = posicion(codigo);
-        if (pos!=-1)
+        
+        if (pos != -1)
             return objetos[pos];
-        else
-            return null;  
+         else
+            return null;
     }
-    
-    public static void darBaja(int pos){
-        String estado = "Inactivo";
+
+    public static void darBaja(int pos) {
+        
+        objetos[pos].setEstado(false);
     }
 }

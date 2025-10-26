@@ -3,23 +3,23 @@ package capa_logica;
 
 /**
  *
- * @author Fernandez 
+ * @author Fernandez Reyes
  */
 public class clsMarca {
     
-    private int codigo;
-    private String nombre;
+    private int     codigo;
+    private String  nombre;
     private boolean estado;
     
     public clsMarca(){
         this.codigo = 0;
-        this.nombre= "";
+        this.nombre = "";
         this.estado = false;
     }
     
     public clsMarca(int codigo, String nombre, boolean estado){
         this.codigo = codigo;
-        this.nombre= nombre;
+        this.nombre = nombre;
         this.estado = estado;
     }
 
