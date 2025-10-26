@@ -18,8 +18,6 @@ public class frmMenu extends javax.swing.JFrame {
         objForm.setLocationRelativeTo(objForm);
         this.setLocationRelativeTo(null);
         objForm.setResizable(false);
-        objForm.setTitle("Login by Fernandez");
-        this.setTitle("Menu Principal by Fernandez");
         objForm.setIconImage( new ImageIcon("src/img/unprg.png").getImage());
         this.setIconImage( new ImageIcon("src/img/unprg.png").getImage());
         objForm.setVisible(true);   
@@ -48,6 +46,7 @@ public class frmMenu extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle(".: Menu Principal by Fernandez :.");
 
         jMenu1.setText("Sistema");
 
@@ -126,11 +125,11 @@ public class frmMenu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
+            .addGap(0, 516, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 273, Short.MAX_VALUE)
+            .addGap(0, 312, Short.MAX_VALUE)
         );
 
         pack();
@@ -150,11 +149,13 @@ public class frmMenu extends javax.swing.JFrame {
 
     private void mnuSistemaCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuSistemaCerrarSesionActionPerformed
         
-        // ocultar la ventana de inicio de sesion
+        // Ocultar la ventana del menu principal
+        this.setVisible(false);
+        
+        // Mostrar la ventana de inicio de sesion
         jdInicionSesion objLogin = new jdInicionSesion(null, true);
         objLogin.setLocationRelativeTo(null);
         objLogin.setResizable(false);
-        objLogin.setTitle("Login by Fernandez");
         objLogin.setIconImage( new ImageIcon("src/img/unprg.png").getImage());
         objLogin.setVisible(true);
         
