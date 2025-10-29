@@ -1,11 +1,17 @@
 
 package capa_presentacion;
 
+import capa_logica.clsUsuario;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author jackh
  */
 public class jdInicioSesion extends javax.swing.JDialog {
+
+    private int captchaActual;
 
     /**
      * Creates new form jdInicioSesion
@@ -15,6 +21,8 @@ public class jdInicioSesion extends javax.swing.JDialog {
     public jdInicioSesion(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        generarNuevoCaptcha();
+        cargarLogo();
     }
 
     /**
@@ -29,15 +37,17 @@ public class jdInicioSesion extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lblCaptcha = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
         txtClave = new javax.swing.JTextField();
         txtVerificar = new javax.swing.JTextField();
         btnCambiar = new javax.swing.JButton();
         btnIniciarSesion = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
+        txtLogo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle(".: Login by Fernandez :.");
 
         jLabel1.setText("USUARIO");
 
@@ -45,9 +55,14 @@ public class jdInicioSesion extends javax.swing.JDialog {
 
         jLabel3.setText("CAPTCHA");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblCaptcha.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         btnCambiar.setText("CAMBIAR");
+        btnCambiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCambiarActionPerformed(evt);
+            }
+        });
 
         btnIniciarSesion.setText("Iniciar Sesion");
         btnIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
@@ -70,7 +85,8 @@ public class jdInicioSesion extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(70, 70, 70)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCaptcha, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -94,7 +110,9 @@ public class jdInicioSesion extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(136, 136, 136)
+                .addGap(22, 22, 22)
+                .addComponent(txtLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -105,7 +123,7 @@ public class jdInicioSesion extends javax.swing.JDialog {
                 .addGap(32, 32, 32)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblCaptcha, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtVerificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -121,14 +139,82 @@ public class jdInicioSesion extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
-        // TODO add your handling code here:
+        
+        clsUsuario objUsuario = new clsUsuario();
+        
+        objUsuario.setUsuario(txtUsuario.getText());
+        objUsuario.setClave(txtClave.getText());
+        
+        // Verificar captcha
+        if (!verificarCaptcha()) {
+            JOptionPane.showMessageDialog(this, "El captcha ingresado es incorrecto",
+                "Error de captcha", JOptionPane.ERROR_MESSAGE);
+            generarNuevoCaptcha();
+            txtVerificar.setText(""); // Limpiar el campo
+            return;
+        }
+        
+        if (objUsuario.iniciarSesion()) {
+            JOptionPane.showMessageDialog(this, "Iniciando sesion...", "Mensaje",
+                JOptionPane.INFORMATION_MESSAGE);
+            this.dispose(); // Cerrar la ventana de login
+        } else {
+            JOptionPane.showMessageDialog(this, "No tiene acceso al sistema", "Mensaje",
+                JOptionPane.ERROR_MESSAGE);
+            generarNuevoCaptcha();
+            txtVerificar.setText("");
+        }
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        // TODO add your handling code here:
+        
+        System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    private void btnCambiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarActionPerformed
+        
+        generarNuevoCaptcha();
+        txtVerificar.setText(""); // Limpia el campo
+    }//GEN-LAST:event_btnCambiarActionPerformed
+
+    public boolean verificarCaptcha(){
+        
+        try {
+            String captchaIngresado = txtVerificar.getText().trim();
+            int captchaIngresadoInt = Integer.parseInt(captchaIngresado);
+            return captchaIngresadoInt == captchaActual;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
     
+    private void cargarLogo() {
+        
+        try {
+            // En caso la imagen cargue  correctamente
+            ImageIcon logo = new ImageIcon(getClass().getResource(("/img/isotipo_unprg.png")));
+        
+            // Redimensionar
+            java.awt.Image img = logo.getImage();
+            java.awt.Image imgEscalada = img.getScaledInstance(300, 91, java.awt.Image.SCALE_SMOOTH);
+            ImageIcon logoEscalado = new ImageIcon(imgEscalada);
+            txtLogo.setIcon(logoEscalado);
+            
+            // Centrar el logo
+            txtLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        } catch (Exception e) {
+            // En caso no encuentra el logo
+            txtLogo.setText("UNPRG");
+            txtLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        }
+    }
+    
+    private void generarNuevoCaptcha(){
+        
+        clsUsuario objUsu = new clsUsuario();
+        captchaActual = objUsu.generarAleatorio();
+        lblCaptcha.setText(Integer.toString(captchaActual));
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCambiar;
@@ -137,8 +223,9 @@ public class jdInicioSesion extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel lblCaptcha;
     private javax.swing.JTextField txtClave;
+    private javax.swing.JLabel txtLogo;
     private javax.swing.JTextField txtUsuario;
     private javax.swing.JTextField txtVerificar;
     // End of variables declaration//GEN-END:variables
