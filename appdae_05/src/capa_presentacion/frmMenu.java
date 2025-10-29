@@ -49,8 +49,12 @@ public class frmMenu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(".: Menu Principal by Fernandez :.");
 
+        jMenuBar1.setForeground(new java.awt.Color(0, 102, 153));
+
+        jMenu1.setForeground(new java.awt.Color(0, 102, 153));
         jMenu1.setText("Sistema");
 
+        mnuSistemaCerrarSesion.setForeground(new java.awt.Color(0, 102, 153));
         mnuSistemaCerrarSesion.setText("Cerrar Sesion");
         mnuSistemaCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,6 +63,7 @@ public class frmMenu extends javax.swing.JFrame {
         });
         jMenu1.add(mnuSistemaCerrarSesion);
 
+        mnuSistemaSalir.setForeground(new java.awt.Color(0, 102, 153));
         mnuSistemaSalir.setText("Salir");
         mnuSistemaSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,6 +74,7 @@ public class frmMenu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu2.setForeground(new java.awt.Color(0, 102, 153));
         jMenu2.setText("Mantenimiento");
         jMenu2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,6 +82,7 @@ public class frmMenu extends javax.swing.JFrame {
             }
         });
 
+        mnuManUsuarios.setForeground(new java.awt.Color(0, 102, 153));
         mnuManUsuarios.setText("Usuarios");
         mnuManUsuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,6 +91,7 @@ public class frmMenu extends javax.swing.JFrame {
         });
         jMenu2.add(mnuManUsuarios);
 
+        mnuManMarcas.setForeground(new java.awt.Color(0, 102, 153));
         mnuManMarcas.setText("Marcas");
         mnuManMarcas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,6 +100,7 @@ public class frmMenu extends javax.swing.JFrame {
         });
         jMenu2.add(mnuManMarcas);
 
+        mnuManMarcas1.setForeground(new java.awt.Color(0, 102, 153));
         mnuManMarcas1.setText("Categoria");
         mnuManMarcas1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,11 +111,14 @@ public class frmMenu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu3.setForeground(new java.awt.Color(0, 102, 153));
         jMenu3.setText("Operaciones");
         jMenuBar1.add(jMenu3);
 
+        jMenu5.setForeground(new java.awt.Color(0, 102, 153));
         jMenu5.setText("Reportes");
 
+        mnuRepUsuarios.setForeground(new java.awt.Color(0, 102, 153));
         mnuRepUsuarios.setText("Usuarios");
         mnuRepUsuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,6 +127,7 @@ public class frmMenu extends javax.swing.JFrame {
         });
         jMenu5.add(mnuRepUsuarios);
 
+        mnuRepUsuariosTipo.setForeground(new java.awt.Color(0, 102, 153));
         mnuRepUsuariosTipo.setText("Usuarios por tipo");
         mnuRepUsuariosTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,6 +138,7 @@ public class frmMenu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu5);
 
+        jMenu4.setForeground(new java.awt.Color(0, 102, 153));
         jMenu4.setText("Ayuda");
         jMenuBar1.add(jMenu4);
 

@@ -7,7 +7,7 @@
 Esta es la interfaz de login:
 
 <div align="center">
-  <img src="assets/login.png" alt="Pantalla de login" width="600">
+  <img src="assets/login.png" alt="Pantalla de login" width="200">
 </div>
 
 ## 🎥 Demostración en Video

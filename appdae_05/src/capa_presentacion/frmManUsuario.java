@@ -66,17 +66,24 @@ public class frmManUsuario extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(".: Registrar usuario by Fernandez :.");
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel1.setBackground(new java.awt.Color(204, 255, 255));
 
+        jLabel1.setForeground(new java.awt.Color(0, 102, 153));
         jLabel1.setText("Usuario");
 
+        jLabel2.setForeground(new java.awt.Color(0, 102, 153));
         jLabel2.setText("Nombre");
 
+        jLabel3.setForeground(new java.awt.Color(0, 102, 153));
         jLabel3.setText("Clave");
 
+        txtUsuario.setForeground(new java.awt.Color(0, 102, 153));
         txtUsuario.setText("USER");
+        txtUsuario.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
+        txtClave.setForeground(new java.awt.Color(0, 102, 153));
         txtClave.setText("getbdg");
+        txtClave.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txtClave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtClaveActionPerformed(evt);
@@ -85,6 +92,10 @@ public class frmManUsuario extends javax.swing.JDialog {
 
         jTextField2.setText("jTextField1");
 
+        txtNombre.setForeground(new java.awt.Color(0, 102, 153));
+        txtNombre.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        cboTipo.setForeground(new java.awt.Color(0, 102, 153));
         cboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Gerente", "Vendedor", "Administrativo" }));
         cboTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,10 +103,13 @@ public class frmManUsuario extends javax.swing.JDialog {
             }
         });
 
+        jLabel4.setForeground(new java.awt.Color(0, 102, 153));
         jLabel4.setText("Tipo");
 
+        jLabel5.setForeground(new java.awt.Color(0, 102, 153));
         jLabel5.setText("Estado");
 
+        chkEstado.setForeground(new java.awt.Color(0, 102, 153));
         chkEstado.setText("Habilitado");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -151,7 +165,7 @@ public class frmManUsuario extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(chkEstado))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(64, 64, 64)
@@ -159,8 +173,9 @@ public class frmManUsuario extends javax.swing.JDialog {
                     .addContainerGap(225, Short.MAX_VALUE)))
         );
 
-        jPanel3.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel3.setBackground(new java.awt.Color(204, 204, 255));
 
+        btnGrabar.setForeground(new java.awt.Color(0, 102, 153));
         btnGrabar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/guardar.png"))); // NOI18N
         btnGrabar.setText("Grabar");
         btnGrabar.addActionListener(new java.awt.event.ActionListener() {
@@ -169,6 +184,7 @@ public class frmManUsuario extends javax.swing.JDialog {
             }
         });
 
+        btnCerrar.setForeground(new java.awt.Color(0, 102, 153));
         btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/cerrar.png"))); // NOI18N
         btnCerrar.setText("Cerrar");
         btnCerrar.addActionListener(new java.awt.event.ActionListener() {
