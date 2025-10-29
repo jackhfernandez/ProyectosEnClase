@@ -1,6 +1,8 @@
 
 package capa_presentacion;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Fernandez Reyes
@@ -15,6 +17,13 @@ public class frmMenu extends javax.swing.JDialog {
     public frmMenu(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setResizable(false);
+        jdInicioSesion objForm = new jdInicioSesion(null, true);
+        objForm.setLocationRelativeTo(null);
+        objForm.setResizable(false);
+        objForm.setIconImage(new ImageIcon("src/img/unprg.png").getImage());
+        this.setIconImage( new ImageIcon("src/img/unprg.png").getImage());
+        objForm.setVisible(true);
     }
 
     /**
@@ -26,24 +35,114 @@ public class frmMenu extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        mnuSistemaCerrarSesion = new javax.swing.JMenuItem();
+        mnuSistemaSalir = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        mnuManEstudiante = new javax.swing.JMenuItem();
+        mnuMantCursos = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        mnuRepEstudiantes = new javax.swing.JMenuItem();
+        mnuRepCursos = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle(".: Menu Principal by Fernandez :.");
+
+        jMenu1.setText("Sistema");
+
+        mnuSistemaCerrarSesion.setText("Cerrar Sesion");
+        mnuSistemaCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuSistemaCerrarSesionActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnuSistemaCerrarSesion);
+
+        mnuSistemaSalir.setText("Salir");
+        mnuSistemaSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuSistemaSalirActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnuSistemaSalir);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Mantenimiento");
+
+        mnuManEstudiante.setText("Estudiantes");
+        jMenu2.add(mnuManEstudiante);
+
+        mnuMantCursos.setText("Cursos");
+        jMenu2.add(mnuMantCursos);
+
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Reportes");
+
+        mnuRepEstudiantes.setText("Estudiantes");
+        jMenu3.add(mnuRepEstudiantes);
+
+        mnuRepCursos.setText("Cursos");
+        jMenu3.add(mnuRepCursos);
+
+        jMenuBar1.add(jMenu3);
+
+        jMenu4.setText("Ayuda");
+        jMenuBar1.add(jMenu4);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 581, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 344, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void mnuSistemaCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuSistemaCerrarSesionActionPerformed
+        
+        // Ocultar la ventana del menu principal
+        this.setVisible(false);
+        
+        // Mostrar la ventana de inicio de sesion
+        jdInicioSesion objLogin = new jdInicioSesion(null, true);
+        objLogin.setLocationRelativeTo(null);
+        objLogin.setResizable(false);
+        objLogin.setIconImage( new ImageIcon("src/img/unprg.png").getImage());
+        objLogin.setVisible(true);
+        
+        // al cerrar sesion mostrar nuevamente ventana de login
+        this.setVisible(true);
+    }//GEN-LAST:event_mnuSistemaCerrarSesionActionPerformed
+
+    private void mnuSistemaSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuSistemaSalirActionPerformed
+        
+        System.exit(0);
+    }//GEN-LAST:event_mnuSistemaSalirActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem mnuManEstudiante;
+    private javax.swing.JMenuItem mnuMantCursos;
+    private javax.swing.JMenuItem mnuRepCursos;
+    private javax.swing.JMenuItem mnuRepEstudiantes;
+    private javax.swing.JMenuItem mnuSistemaCerrarSesion;
+    private javax.swing.JMenuItem mnuSistemaSalir;
     // End of variables declaration//GEN-END:variables
 }

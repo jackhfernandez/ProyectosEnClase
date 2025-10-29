@@ -57,6 +57,10 @@ public class jdInicioSesion extends javax.swing.JDialog {
 
         lblCaptcha.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
+        txtUsuario.setText("admin");
+
+        txtClave.setText("1234");
+
         btnCambiar.setText("CAMBIAR");
         btnCambiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

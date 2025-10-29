@@ -12,7 +12,8 @@ public class Fernandez {
      */
     public static void main(String[] args) {
         
-        
+        frmMenu objMenu = new frmMenu(null, true);
+        objMenu.setVisible(true);
     }
     
 }
