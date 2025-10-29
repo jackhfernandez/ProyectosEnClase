@@ -84,6 +84,7 @@ public class clsCurso {
         this.cantEstudiantes = cantEstudiantes;
     }
     
+    @Override
     public String toString(){
         return "\n\t" + id + "\t" + codigo + "\t" + nombre + "\t" + creditos + "\t" + ciclo + "\t" + cantEstudiantes; 
     } 
