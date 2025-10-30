@@ -39,7 +39,7 @@ public class frmMenu extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         mnuManUsuarios = new javax.swing.JMenuItem();
         mnuManMarcas = new javax.swing.JMenuItem();
-        mnuManMarcas1 = new javax.swing.JMenuItem();
+        mnuManCategoria = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         mnuRepUsuarios = new javax.swing.JMenuItem();
@@ -100,14 +100,14 @@ public class frmMenu extends javax.swing.JFrame {
         });
         jMenu2.add(mnuManMarcas);
 
-        mnuManMarcas1.setForeground(new java.awt.Color(0, 102, 153));
-        mnuManMarcas1.setText("Categoria");
-        mnuManMarcas1.addActionListener(new java.awt.event.ActionListener() {
+        mnuManCategoria.setForeground(new java.awt.Color(0, 102, 153));
+        mnuManCategoria.setText("Categoria");
+        mnuManCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuManMarcas1ActionPerformed(evt);
+                mnuManCategoriaActionPerformed(evt);
             }
         });
-        jMenu2.add(mnuManMarcas1);
+        jMenu2.add(mnuManCategoria);
 
         jMenuBar1.add(jMenu2);
 
@@ -212,9 +212,12 @@ public class frmMenu extends javax.swing.JFrame {
         objForm.setVisible(true);
     }//GEN-LAST:event_mnuManMarcasActionPerformed
 
-    private void mnuManMarcas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuManMarcas1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mnuManMarcas1ActionPerformed
+    private void mnuManCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuManCategoriaActionPerformed
+        
+        fmrManCategoria objForm = new fmrManCategoria(this, true);
+        objForm.setLocationRelativeTo(this);
+        objForm.setVisible(true);
+    }//GEN-LAST:event_mnuManCategoriaActionPerformed
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
@@ -223,8 +226,8 @@ public class frmMenu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem mnuManCategoria;
     private javax.swing.JMenuItem mnuManMarcas;
-    private javax.swing.JMenuItem mnuManMarcas1;
     private javax.swing.JMenuItem mnuManUsuarios;
     private javax.swing.JMenuItem mnuRepUsuarios;
     private javax.swing.JMenuItem mnuRepUsuariosTipo;

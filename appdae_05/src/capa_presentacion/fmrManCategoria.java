@@ -1,7 +1,11 @@
-
 package capa_presentacion;
 
+import capa_datos.clsCategoriaDAO;
+import capa_logica.clsCategoria;
+import complemento.Funciones;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -11,13 +15,15 @@ public class fmrManCategoria extends javax.swing.JDialog {
 
     /**
      * Creates new form fmrManCategoria
+     *
      * @param parent
      * @param modal
      */
     public fmrManCategoria(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        this.setIconImage( new ImageIcon("src/img/unprg.png").getImage());
+        this.setIconImage(new ImageIcon("src/img/unprg.png").getImage());
+        listado();
     }
 
     /**
@@ -31,7 +37,7 @@ public class fmrManCategoria extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         txtCodigo = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         txtNombre = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -48,7 +54,7 @@ public class fmrManCategoria extends javax.swing.JDialog {
         btnSalir = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblCategorias = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(".: Mantenimiento de Categorias by Fernandez :.");
@@ -57,7 +63,12 @@ public class fmrManCategoria extends javax.swing.JDialog {
 
         txtCodigo.setForeground(new java.awt.Color(0, 102, 153));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/buscarMarca.png"))); // NOI18N
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/buscarMarca.png"))); // NOI18N
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         txtNombre.setForeground(new java.awt.Color(0, 102, 153));
 
@@ -98,7 +109,7 @@ public class fmrManCategoria extends javax.swing.JDialog {
                             .addComponent(chkEstado, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
                             .addComponent(txtCodigo))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1))
+                        .addComponent(btnBuscar))
                     .addComponent(txtDescripcion))
                 .addGap(33, 33, 33))
         );
@@ -112,7 +123,7 @@ public class fmrManCategoria extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)))
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -133,26 +144,56 @@ public class fmrManCategoria extends javax.swing.JDialog {
         btnNuevo.setForeground(new java.awt.Color(0, 102, 153));
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/registrarMarca.png"))); // NOI18N
         btnNuevo.setText("Nuevo");
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoActionPerformed(evt);
+            }
+        });
 
         btnLimpiar.setForeground(new java.awt.Color(0, 102, 153));
         btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/limpiarMarca.png"))); // NOI18N
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
 
         btnEliminar.setForeground(new java.awt.Color(0, 102, 153));
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/eliminarMarca.png"))); // NOI18N
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         btnModificar.setForeground(new java.awt.Color(0, 102, 153));
         btnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/modificarMarca.png"))); // NOI18N
         btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
 
         btnDarBaja.setForeground(new java.awt.Color(0, 102, 153));
         btnDarBaja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/darBajaMarca.png"))); // NOI18N
         btnDarBaja.setText("Dar baja");
+        btnDarBaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDarBajaActionPerformed(evt);
+            }
+        });
 
         btnSalir.setForeground(new java.awt.Color(0, 102, 153));
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/salirMarca.png"))); // NOI18N
         btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -191,7 +232,7 @@ public class fmrManCategoria extends javax.swing.JDialog {
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 255));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblCategorias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -199,7 +240,12 @@ public class fmrManCategoria extends javax.swing.JDialog {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tblCategorias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblCategoriasMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblCategorias);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -239,9 +285,241 @@ public class fmrManCategoria extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+
+        if (txtCodigo.getText().isEmpty()
+            || txtNombre.getText().isEmpty()) {
+
+            JOptionPane.showMessageDialog(
+                this,
+                "Falta datos",
+                "Error",
+                JOptionPane.ERROR_MESSAGE
+            );
+        } else {
+            clsCategoria objCategoria = new clsCategoria(
+                Integer.parseInt(
+                    txtCodigo.getText()),
+                txtNombre.getText().toUpperCase(),
+                txtDescripcion.getText(),
+                chkEstado.isSelected()
+            );
+
+            clsCategoriaDAO.agregar(objCategoria);
+            JOptionPane.showMessageDialog(
+                this,
+                "Categoria registrada en el sistema",
+                "Mensaje",
+                JOptionPane.INFORMATION_MESSAGE);
+            listado();
+            limpiar();
+        }
+    }//GEN-LAST:event_btnNuevoActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+
+        limpiar();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+
+        if (!txtCodigo.getText().isEmpty()) {
+
+            int pos = clsCategoriaDAO.posicion(Integer.parseInt(txtCodigo.getText()));
+
+            if (pos != -1) {
+
+                String cadena = "¿Estas seguro de eliminar la categoria " + txtNombre.getText() + "?";
+                int respuesta = Funciones.dialogoPregunta(cadena);
+
+                if (respuesta == JOptionPane.YES_OPTION) {
+
+                    clsCategoriaDAO.eliminar(pos);
+                    JOptionPane.showMessageDialog(
+                        this,
+                        "Categoria Eliminada",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+                    listado();
+                    limpiar();
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(
+                    this,
+                    "Marca no encontrada",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+                );
+            }
+        } else {
+            JOptionPane.showMessageDialog(
+                this,
+                "Se requiere el codigo de la categoria",
+                "Error",
+                JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+
+        if (!txtCodigo.getText().isEmpty()) {
+
+            String cadena = "¿Estas seguro de modificar la categoria " + txtNombre.getText() + "?";
+            
+            int respuesta = Funciones.dialogoPregunta(cadena);
+            
+            if (respuesta == JOptionPane.YES_OPTION) {
+                
+                int pos = clsCategoriaDAO.posicion(Integer.parseInt(txtCodigo.getText()));
+
+                if (pos != -1) {
+                    clsCategoria objCat = new clsCategoria(
+                        Integer.parseInt(txtCodigo.getText()),
+                        txtNombre.getText(),
+                        txtDescripcion.getText(),
+                        chkEstado.isSelected()
+                    );
+
+                    clsCategoriaDAO.modificar(pos, objCat);
+                    JOptionPane.showMessageDialog(
+                        this,
+                        "Categoria Modificada",
+                        "Mensaje",
+                        JOptionPane.INFORMATION_MESSAGE
+                    );
+                    listado();
+                    limpiar();
+                } else {
+                    JOptionPane.showMessageDialog(
+                        this,
+                        "Categoria no encontrada",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
+                    );
+                }
+            }
+        } else {
+
+            JOptionPane.showMessageDialog(
+                this,
+                "Se requiere el codigo de la categoria",
+                "Error",
+                JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnDarBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDarBajaActionPerformed
+
+        if (!txtCodigo.getText().isEmpty()) {
+
+            int pos = clsCategoriaDAO.posicion(Integer.parseInt(txtCodigo.getText()));
+
+            if (pos != -1) {
+
+                clsCategoriaDAO.darBaja(pos);
+                JOptionPane.showMessageDialog(
+                    this,
+                    "Categoria dada de baja",
+                    "Mensaje",
+                    JOptionPane.INFORMATION_MESSAGE
+                );
+                listado();
+                limpiar();
+
+            } else {
+                JOptionPane.showMessageDialog(this,
+                    "Se requiere el codigo de la categoria",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+                );
+            }
+        } else {
+            JOptionPane.showMessageDialog(this,
+                "Categoria no encontrada",
+                "Error",
+                JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }//GEN-LAST:event_btnDarBajaActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        
+        if (txtCodigo.getText().isEmpty()) {
+            
+            JOptionPane.showMessageDialog(
+                this,
+                "Se requiere el codigo de la categoria",
+                "Error",
+                JOptionPane.ERROR_MESSAGE
+                );
+        } else {
+            clsCategoria objCat = clsCategoriaDAO.getElement(
+                Integer.parseInt(txtCodigo.getText()));
+                txtCodigo.setText(String.valueOf(objCat.getCodigo()));
+                txtNombre.setText(objCat.getNombre());
+                txtDescripcion.setText(objCat.getDescripcion());
+                chkEstado.setSelected(objCat.isEstado());           
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void tblCategoriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCategoriasMouseClicked
+        
+        int fila = tblCategorias.getSelectedRow();
+        String codigo = tblCategorias.getValueAt(fila, 0).toString();
+        txtCodigo.setText(codigo);
+        
+        btnBuscarActionPerformed(null);
+    }//GEN-LAST:event_tblCategoriasMouseClicked
+
+    private void listado() {
+
+        String estado;
+        DefaultTableModel modelo = new DefaultTableModel();
+
+        modelo.addColumn("Codigo");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Descripcion");
+        modelo.addColumn("Estado");
+
+        clsCategoria[] datos = clsCategoriaDAO.obtener();
+
+        int cantidad = clsCategoriaDAO.getCantidad();
+
+        for (int i = 0; i < cantidad; i++) {
+
+            clsCategoria objCategoria = datos[i];
+
+            estado = objCategoria.isEstado() ? "Activo" : "Inactivo";
+
+            modelo.addRow(new Object[]{
+                objCategoria.getCodigo(),
+                objCategoria.getNombre(),
+                objCategoria.getDescripcion(),
+                estado
+            });
+        }
+
+        tblCategorias.setModel(modelo);
+    }
+
+    private void limpiar() {
+
+        txtCodigo.setText("");
+        txtNombre.setText("");
+        txtDescripcion.setText("");
+        chkEstado.setSelected(false);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnDarBaja;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnLimpiar;
@@ -249,7 +527,6 @@ public class fmrManCategoria extends javax.swing.JDialog {
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnSalir;
     private javax.swing.JCheckBox chkEstado;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -258,7 +535,7 @@ public class fmrManCategoria extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblCategorias;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtNombre;
