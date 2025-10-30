@@ -39,11 +39,13 @@ public class frmMenu extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         mnuManUsuarios = new javax.swing.JMenuItem();
         mnuManMarcas = new javax.swing.JMenuItem();
-        mnuManCategoria = new javax.swing.JMenuItem();
+        mnuManCategorias = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         mnuRepUsuarios = new javax.swing.JMenuItem();
         mnuRepUsuariosTipo = new javax.swing.JMenuItem();
+        mnuRepMarcas = new javax.swing.JMenuItem();
+        mnuRepCategorias = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -100,14 +102,14 @@ public class frmMenu extends javax.swing.JFrame {
         });
         jMenu2.add(mnuManMarcas);
 
-        mnuManCategoria.setForeground(new java.awt.Color(0, 102, 153));
-        mnuManCategoria.setText("Categoria");
-        mnuManCategoria.addActionListener(new java.awt.event.ActionListener() {
+        mnuManCategorias.setForeground(new java.awt.Color(0, 102, 153));
+        mnuManCategorias.setText("Categoria");
+        mnuManCategorias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuManCategoriaActionPerformed(evt);
+                mnuManCategoriasActionPerformed(evt);
             }
         });
-        jMenu2.add(mnuManCategoria);
+        jMenu2.add(mnuManCategorias);
 
         jMenuBar1.add(jMenu2);
 
@@ -135,6 +137,24 @@ public class frmMenu extends javax.swing.JFrame {
             }
         });
         jMenu5.add(mnuRepUsuariosTipo);
+
+        mnuRepMarcas.setForeground(new java.awt.Color(0, 102, 153));
+        mnuRepMarcas.setText("Marcas");
+        mnuRepMarcas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuRepMarcasActionPerformed(evt);
+            }
+        });
+        jMenu5.add(mnuRepMarcas);
+
+        mnuRepCategorias.setForeground(new java.awt.Color(0, 102, 153));
+        mnuRepCategorias.setText("Categorias");
+        mnuRepCategorias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuRepCategoriasActionPerformed(evt);
+            }
+        });
+        jMenu5.add(mnuRepCategorias);
 
         jMenuBar1.add(jMenu5);
 
@@ -206,18 +226,32 @@ public class frmMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu2ActionPerformed
 
     private void mnuManMarcasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuManMarcasActionPerformed
-        
+         
         frmManMarca objForm = new frmManMarca(this, true);
         objForm.setLocationRelativeTo(this);
         objForm.setVisible(true);
     }//GEN-LAST:event_mnuManMarcasActionPerformed
 
-    private void mnuManCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuManCategoriaActionPerformed
+    private void mnuManCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuManCategoriasActionPerformed
         
         fmrManCategoria objForm = new fmrManCategoria(this, true);
         objForm.setLocationRelativeTo(this);
         objForm.setVisible(true);
-    }//GEN-LAST:event_mnuManCategoriaActionPerformed
+    }//GEN-LAST:event_mnuManCategoriasActionPerformed
+
+    private void mnuRepMarcasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuRepMarcasActionPerformed
+        
+        jdRepMarcas objForm = new jdRepMarcas(this, true);
+        objForm.setLocationRelativeTo(this);
+        objForm.setVisible(true);
+    }//GEN-LAST:event_mnuRepMarcasActionPerformed
+
+    private void mnuRepCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuRepCategoriasActionPerformed
+        
+        jdRepCategorias objForm = new jdRepCategorias(this, true);
+        objForm.setLocationRelativeTo(this);
+        objForm.setVisible(true);
+    }//GEN-LAST:event_mnuRepCategoriasActionPerformed
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
@@ -226,9 +260,11 @@ public class frmMenu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem mnuManCategoria;
+    private javax.swing.JMenuItem mnuManCategorias;
     private javax.swing.JMenuItem mnuManMarcas;
     private javax.swing.JMenuItem mnuManUsuarios;
+    private javax.swing.JMenuItem mnuRepCategorias;
+    private javax.swing.JMenuItem mnuRepMarcas;
     private javax.swing.JMenuItem mnuRepUsuarios;
     private javax.swing.JMenuItem mnuRepUsuariosTipo;
     private javax.swing.JMenuItem mnuSistemaCerrarSesion;

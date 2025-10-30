@@ -1,19 +1,22 @@
+
 package capa_presentacion;
 
-import capa_datos.clsUsuarioDAO;
-import capa_logica.clsUsuario;
+import capa_datos.clsCategoriaDAO;
+import capa_logica.clsCategoria;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Fernandez Reyes
  */
-public class jdRepUsuarios extends javax.swing.JDialog {
+public class jdRepCategorias extends javax.swing.JDialog {
 
     /**
-     * Creates new form jdRepUsuarios
+     * Creates new form jdRepCategorias
+     * @param parent
+     * @param modal
      */
-    public jdRepUsuarios(java.awt.Frame parent, boolean modal) {
+    public jdRepCategorias(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         listado();
@@ -34,12 +37,11 @@ public class jdRepUsuarios extends javax.swing.JDialog {
         btnCerrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle(".: Listado de usuarios :.");
+        setTitle(".: Reporte de categorias :.");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 153));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Listado de Usuarios del Sistema");
+        jLabel1.setText("Lista de Categorias");
 
         tblListado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -53,6 +55,7 @@ public class jdRepUsuarios extends javax.swing.JDialog {
 
         btnCerrar.setForeground(new java.awt.Color(255, 0, 0));
         btnCerrar.setText("Cerrar");
+        btnCerrar.setToolTipText("");
         btnCerrar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 51, 51), 1, true));
         btnCerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -65,33 +68,34 @@ public class jdRepUsuarios extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52)
-                        .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35))
+                .addContainerGap(7, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(58, 58, 58)
+                        .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(67, 67, 67))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 679, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                    .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
-        
+
         this.dispose();
     }//GEN-LAST:event_btnCerrarActionPerformed
 
@@ -100,21 +104,25 @@ public class jdRepUsuarios extends javax.swing.JDialog {
         String estado;
         DefaultTableModel modelo = new DefaultTableModel();
         
-        modelo.addColumn("Usuario");
-        modelo.addColumn("Nombre Usuario");
-        modelo.addColumn("Tipo");
+        modelo.addColumn("Codigo");
+        modelo.addColumn("Categoria");
+        modelo.addColumn("Descripcion");
         modelo.addColumn("Estado");
         
-        clsUsuario[] datos = clsUsuarioDAO.obtener();
-        int cantidad = clsUsuarioDAO.getCantidad();
+        clsCategoria[] datos = clsCategoriaDAO.obtener();
+        int cantidad = clsCategoriaDAO.getCantidad();
         
         for (int i = 0; i < cantidad; i++) {
-            clsUsuario clsUsu = datos[i];
             
-            estado = clsUsu.isEstado() ? "Activo" : "Inactivo";
+            clsCategoria clsCat = datos[i];
             
-            modelo.addRow(new Object[]{clsUsu.getUsuario(), clsUsu.getNombre(),
-                clsUsu.getTipo(), estado
+            estado = clsCat.isEstado() ? "Activo" : "Inactivo";
+            
+            modelo.addRow( new Object[] {
+                clsCat.getCodigo(),
+                clsCat.getNombre(),
+                clsCat.getDescripcion(),
+                estado
             });
         }
         
