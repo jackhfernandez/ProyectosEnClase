@@ -80,10 +80,20 @@ public class frmMenu extends javax.swing.JDialog {
 
         mnuManEstudiante.setForeground(new java.awt.Color(0, 102, 153));
         mnuManEstudiante.setText("Estudiantes");
+        mnuManEstudiante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuManEstudianteActionPerformed(evt);
+            }
+        });
         jMenu2.add(mnuManEstudiante);
 
         mnuMantCursos.setForeground(new java.awt.Color(0, 102, 153));
         mnuMantCursos.setText("Cursos");
+        mnuMantCursos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuMantCursosActionPerformed(evt);
+            }
+        });
         jMenu2.add(mnuMantCursos);
 
         jMenuBar1.add(jMenu2);
@@ -142,7 +152,17 @@ public class frmMenu extends javax.swing.JDialog {
         System.exit(0);
     }//GEN-LAST:event_mnuSistemaSalirActionPerformed
 
-    
+    private void mnuManEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuManEstudianteActionPerformed
+        
+        frmManEstudiantes objForm = new frmManEstudiantes(null, true);
+        objForm.setLocationRelativeTo(this);
+        objForm.setVisible(true);
+    }//GEN-LAST:event_mnuManEstudianteActionPerformed
+
+    private void mnuMantCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuMantCursosActionPerformed
+        
+    }//GEN-LAST:event_mnuMantCursosActionPerformed
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;

@@ -31,8 +31,38 @@ public class clsEstudianteDAO {
         return cantidad;
     }
 
-    public static void eliminar(clsEstudiante clsEst) {
+    public static void eliminar( int pos){
         
-        // Metodod para eliminar
+        for (int i = 0; i < cantidad; i++) {
+            objetos[pos] = objetos[pos+1];
+        }
+        cantidad--;
+    }
+    
+    public static clsEstudiante getElemento(int codigo) {
+        int pos = posicion(codigo);
+        
+        if (pos != -1)
+            return objetos[pos];
+        else
+            return null;
+    }
+    
+    public static int posicion(int codigo) {
+        
+        int pos = -1;
+        
+        for (int i = 0; i < cantidad; i++) {
+            if (objetos[i].getId() == codigo) {
+                pos = i;
+                break;
+            }
+        }
+        return pos;
+    }
+    
+    public static void modificar(int pos, clsEstudiante objEst) {
+        
+        objetos[pos] = objEst;
     }
 }
