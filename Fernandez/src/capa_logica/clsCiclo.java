@@ -82,10 +82,10 @@ public class clsCiclo {
     public void setCursos(String[] cursos) {
         this.cursos = cursos;
     }
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         return "\n\t" + id + "\n" + nombre + "\n" + fechaInicio + "\n" + fechaFin + "\n" + activo + "\n" + Arrays.toString(cursos);
     }
-
+    
 }

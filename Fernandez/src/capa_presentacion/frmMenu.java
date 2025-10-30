@@ -50,8 +50,12 @@ public class frmMenu extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(".: Menu Principal by Fernandez :.");
 
+        jMenuBar1.setForeground(new java.awt.Color(0, 102, 153));
+
+        jMenu1.setForeground(new java.awt.Color(0, 102, 153));
         jMenu1.setText("Sistema");
 
+        mnuSistemaCerrarSesion.setForeground(new java.awt.Color(0, 102, 153));
         mnuSistemaCerrarSesion.setText("Cerrar Sesion");
         mnuSistemaCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -60,6 +64,7 @@ public class frmMenu extends javax.swing.JDialog {
         });
         jMenu1.add(mnuSistemaCerrarSesion);
 
+        mnuSistemaSalir.setForeground(new java.awt.Color(0, 102, 153));
         mnuSistemaSalir.setText("Salir");
         mnuSistemaSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -70,26 +75,33 @@ public class frmMenu extends javax.swing.JDialog {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu2.setForeground(new java.awt.Color(0, 102, 153));
         jMenu2.setText("Mantenimiento");
 
+        mnuManEstudiante.setForeground(new java.awt.Color(0, 102, 153));
         mnuManEstudiante.setText("Estudiantes");
         jMenu2.add(mnuManEstudiante);
 
+        mnuMantCursos.setForeground(new java.awt.Color(0, 102, 153));
         mnuMantCursos.setText("Cursos");
         jMenu2.add(mnuMantCursos);
 
         jMenuBar1.add(jMenu2);
 
+        jMenu3.setForeground(new java.awt.Color(0, 102, 153));
         jMenu3.setText("Reportes");
 
+        mnuRepEstudiantes.setForeground(new java.awt.Color(0, 102, 153));
         mnuRepEstudiantes.setText("Estudiantes");
         jMenu3.add(mnuRepEstudiantes);
 
+        mnuRepCursos.setForeground(new java.awt.Color(0, 102, 153));
         mnuRepCursos.setText("Cursos");
         jMenu3.add(mnuRepCursos);
 
         jMenuBar1.add(jMenu3);
 
+        jMenu4.setForeground(new java.awt.Color(0, 102, 153));
         jMenu4.setText("Ayuda");
         jMenuBar1.add(jMenu4);
 

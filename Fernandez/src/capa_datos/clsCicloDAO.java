@@ -13,7 +13,9 @@ public class clsCicloDAO {
     private static int cantidad;
     
     public clsCicloDAO(){
+        objetos = new clsCiclo[cantidad];
         cantidad = 0;
+        inicializarCiclo();
     }
     
     public static void agregar(clsCiclo clsCiclo){
@@ -22,6 +24,17 @@ public class clsCicloDAO {
             objetos[cantidad] = clsCiclo;
             cantidad++;
         }
+    }
+    
+    // Inicializar ciclo
+    private void inicializarCiclo() {
+
+        agregar( new clsCiclo(1, "Ciclo-2025", "01/03/2025", "30/06/205", true, null));
+        agregar( new clsCiclo(2, "Ciclo-2025", "01/03/2025", "30/06/205", true, null));
+        agregar( new clsCiclo(3, "Ciclo-2025", "01/03/2025", "30/06/205", true, null));
+        agregar( new clsCiclo(4, "Ciclo-2025", "01/03/2025", "30/06/205", true, null));
+        agregar( new clsCiclo(5, "Ciclo-2025", "01/03/2025", "30/06/205", true, null));
+        
     }
     
     public static clsCiclo[] obtener(){
