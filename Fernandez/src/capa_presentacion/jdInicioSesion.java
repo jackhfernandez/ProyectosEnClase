@@ -78,7 +78,7 @@ public class jdInicioSesion extends javax.swing.JDialog {
         });
 
         btnIniciarSesion.setForeground(new java.awt.Color(0, 102, 0));
-        btnIniciarSesion.setText("Iniciar Sesion");
+        btnIniciarSesion.setText("INICIAR SESION");
         btnIniciarSesion.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 0), 1, true));
         btnIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,7 +87,7 @@ public class jdInicioSesion extends javax.swing.JDialog {
         });
 
         btnSalir.setForeground(new java.awt.Color(255, 51, 51));
-        btnSalir.setText("Salir");
+        btnSalir.setText("SALIR");
         btnSalir.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 51, 51), 1, true));
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,7 +107,7 @@ public class jdInicioSesion extends javax.swing.JDialog {
                     .addComponent(jLabel3)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(btnIniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnIniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -146,11 +146,11 @@ public class jdInicioSesion extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtVerificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCambiar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnIniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         pack();

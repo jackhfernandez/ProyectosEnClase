@@ -12,6 +12,7 @@ public class clsEstudiante {
     private String sexo;
     private String telefono;
     private String direccion;
+    private boolean estado;
 
     public clsEstudiante(){
         
@@ -21,15 +22,18 @@ public class clsEstudiante {
         this.sexo = "";
         this.telefono = "";
         this.direccion = "";
+        this.estado = false;
     }
     
-    public clsEstudiante(int id, String nombres, String apellidos, String sexo, String telefono, String direccion) {
+    public clsEstudiante(int id, String nombres, String apellidos, String sexo, String telefono, String direccion, boolean estado) {
+        
         this.id = id;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.sexo = sexo;
         this.telefono = telefono;
         this.direccion = direccion;
+        this.estado = estado;
     }
 
     public int getId() {
@@ -80,8 +84,17 @@ public class clsEstudiante {
         this.direccion = direccion;
     }
 
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+    
+
     @Override
     public String toString(){
-        return "\n\t" + id + "\t" + nombres + "\t" + apellidos + "\t" + sexo + "\t" + telefono + "\t" + direccion;
+        return "\n\t" + id + "\t" + nombres + "\t" + apellidos + "\t" + sexo + "\t" + telefono + "\t" + direccion + "\t" + estado;
     }
 }

@@ -1,5 +1,10 @@
-
 package capa_presentacion;
+
+import capa_datos.clsCursoDAO;
+import capa_logica.clsCurso;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -9,12 +14,15 @@ public class frmRepCursos extends javax.swing.JDialog {
 
     /**
      * Creates new form frmRepCursos
+     *
      * @param parent
      * @param modal
      */
     public frmRepCursos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setIconImage(new ImageIcon("src/img/unprg.png").getImage());
+
     }
 
     /**
@@ -27,26 +35,37 @@ public class frmRepCursos extends javax.swing.JDialog {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        txtIdBuscar = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
+        btnCerrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblListado = new javax.swing.JTable();
-        btnCerrar = new javax.swing.JButton();
+        cmbCiclo = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle(".: Reporte de Cursos :.");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 153));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Listado de Cursos Por Ciclo");
+        jLabel1.setText("Listado de Cursos");
 
-        tblListado.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 102, 153));
+        jLabel8.setText("Buscar por cursos por ID ");
 
-            },
-            new String [] {
+        txtIdBuscar.setForeground(new java.awt.Color(0, 102, 153));
 
+        btnBuscar.setForeground(new java.awt.Color(0, 102, 153));
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buscarMarca.png"))); // NOI18N
+        btnBuscar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
             }
-        ));
-        jScrollPane1.setViewportView(tblListado);
+        });
 
         btnCerrar.setForeground(new java.awt.Color(255, 0, 0));
         btnCerrar.setText("Cerrar");
@@ -57,48 +76,254 @@ public class frmRepCursos extends javax.swing.JDialog {
             }
         });
 
+        tblListado.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        tblListado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblListadoMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblListado);
+
+        cmbCiclo.setForeground(new java.awt.Color(0, 102, 153));
+        cmbCiclo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto", "Septimo", "Octavo", "Noveno", "Decimo" }));
+        cmbCiclo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbCicloActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 102, 153));
+        jLabel9.setText("Buscar por cursos por CICLO ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(106, 106, 106)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(79, 79, 79)
-                        .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(59, 59, 59))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 718, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel8))
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtIdBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                        .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(68, 68, 68))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cmbCiclo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                    .addComponent(jLabel9)
+                    .addComponent(cmbCiclo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel8)
+                                .addComponent(txtIdBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(25, 25, 25)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void listarTodos() {
+
+        DefaultTableModel modelo = new DefaultTableModel();
+
+        modelo.addColumn("ID");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Créditos");
+        modelo.addColumn("Ciclo");
+        modelo.addColumn("Estado");
+
+        clsCurso[] datos = clsCursoDAO.obtener();
+        int cantidad = clsCursoDAO.getCantidad();
+
+        for (int i = 0; i < cantidad; i++) {
+            clsCurso objCurso = datos[i];
+            String estado = objCurso.isEstado() ? "Activo" : "Inactivo";
+
+            modelo.addRow(new Object[]{
+                objCurso.getId(),
+                objCurso.getNombre(),
+                objCurso.getCreditos(),
+                objCurso.getCiclo(),
+                estado
+            });
+        }
+
+        tblListado.setModel(modelo);
+    }
+
+    private void listarPorCiclo(int ciclo) {
+        DefaultTableModel modelo = new DefaultTableModel();
+
+        modelo.addColumn("ID");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Créditos");
+        modelo.addColumn("Ciclo");
+        modelo.addColumn("Estado");
+
+        clsCurso[] datos = clsCursoDAO.obtener();
+        int cantidad = clsCursoDAO.getCantidad();
+
+        for (int i = 0; i < cantidad; i++) {
+            clsCurso objCurso = datos[i];
+
+            // Filtrar por ciclo
+            if (objCurso.getCiclo() == ciclo) {
+                String estado = objCurso.isEstado() ? "Activo" : "Inactivo";
+
+                modelo.addRow(new Object[]{
+                    objCurso.getId(),
+                    objCurso.getNombre(),
+                    objCurso.getCreditos(),
+                    objCurso.getCiclo(),
+                    estado
+                });
+            }
+        }
+
+        tblListado.setModel(modelo);
+    }
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+
+        if (txtIdBuscar.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Se requiere el ID del curso",
+                "Error",
+                JOptionPane.ERROR_MESSAGE
+            );
+
+        } else {
+
+            try {
+                int idBuscado = Integer.parseInt(txtIdBuscar.getText());
+                clsCurso[] datos = clsCursoDAO.obtener();
+                int cantidad = clsCursoDAO.getCantidad();
+                boolean encontrado = false;
+                
+                DefaultTableModel modelo = new DefaultTableModel();
+                
+                modelo.addColumn("Id");
+                modelo.addColumn("Nombre");
+                modelo.addColumn("Creditos");
+                modelo.addColumn("Ciclo");
+                modelo.addColumn("EStado");
+                
+                for (int i = 0; i < cantidad; i++) {
+                    clsCurso objCurso = datos[i];
+                    
+                    if (objCurso.getId() == idBuscado) {
+                        String estado = objCurso.isEstado() ? "Activo" : "Inactivo";
+                        
+                        modelo.addRow(new Object[] {
+                            objCurso.getId(),
+                            objCurso.getNombre(),
+                            objCurso.getCreditos(),
+                            objCurso.getCiclo(),
+                            estado
+                        });
+                        
+                        encontrado = true;
+                        break;
+                    }
+                }
+                
+                if (!encontrado) {
+                    JOptionPane.showMessageDialog(
+                        this,
+                        "No se encontro el curso con ID " + idBuscado,
+                        "Informacion",
+                        JOptionPane.INFORMATION_MESSAGE
+                    );
+                }
+                
+                tblListado.setModel(modelo);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(
+                    this,
+                    "El ID debe ser un numero valido",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+                );
+            }
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
 
         this.dispose();
     }//GEN-LAST:event_btnCerrarActionPerformed
 
-    
+    private void tblListadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblListadoMouseClicked
+
+        int fila = tblListado.getSelectedRow();
+        String id = tblListado.getValueAt(fila, 0).toString();
+        txtIdBuscar.setText(id);
+
+        btnBuscarActionPerformed(null);
+    }//GEN-LAST:event_tblListadoMouseClicked
+
+    private void cmbCicloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCicloActionPerformed
+
+        String seleccion = cmbCiclo.getSelectedItem().toString();
+
+        if (seleccion.equals("TODOS")) {
+            listarTodos();
+        } else {
+            int ciclo = cmbCiclo.getSelectedIndex();
+            listarPorCiclo(ciclo);
+        }
+    }//GEN-LAST:event_cmbCicloActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCerrar;
+    private javax.swing.JComboBox<String> cmbCiclo;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblListado;
+    private javax.swing.JTextField txtIdBuscar;
     // End of variables declaration//GEN-END:variables
 }

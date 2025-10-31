@@ -10,10 +10,10 @@ public class clsCurso {
     private int id;
     private String codigo;
     private String nombre;
-    private int creditos;
-    // se debe hacer una referencia al objeto clsCiclo al que pertenece este curso
-    private clsCiclo ciclo;
+    private int creditos; 
+    private int ciclo;
     private int cantEstudiantes;
+    private boolean estado;
 
     public clsCurso() {
         
@@ -21,12 +21,13 @@ public class clsCurso {
         this.codigo = "";
         this.nombre = "";
         this.creditos = 0;
-        this.ciclo = null;
+        this.ciclo = 0;
         this.cantEstudiantes = 0;
+        this.estado = false;
 
     }
 
-    public clsCurso(int id, String codigo, String nombre, int creditos, clsCiclo ciclo, int cantEstudiantes) {
+    public clsCurso(int id, String codigo, String nombre, int creditos, int ciclo, int cantEstudiantes, boolean estado) {
         
         this.id = id;
         this.codigo = codigo;
@@ -34,6 +35,7 @@ public class clsCurso {
         this.creditos = creditos;
         this.ciclo = ciclo;
         this.cantEstudiantes = cantEstudiantes;
+        this.estado = estado;
     }
 
     public int getId() {
@@ -68,11 +70,11 @@ public class clsCurso {
         this.creditos = creditos;
     }
 
-    public clsCiclo getCiclo() {
+    public int getCiclo() {
         return ciclo;
     }
 
-    public void setCiclo(clsCiclo ciclo) {
+    public void setCiclo(int ciclo) {
         this.ciclo = ciclo;
     }
 
@@ -82,6 +84,14 @@ public class clsCurso {
 
     public void setCantEstudiantes(int cantEstudiantes) {
         this.cantEstudiantes = cantEstudiantes;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
     
     @Override

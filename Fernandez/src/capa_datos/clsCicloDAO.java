@@ -1,4 +1,3 @@
-
 package capa_datos;
 
 import capa_logica.clsCiclo;
@@ -8,40 +7,90 @@ import capa_logica.clsCiclo;
  * @author Fernandez Reyes
  */
 public class clsCicloDAO {
-    
-    private static clsCiclo[] objetos = new clsCiclo[10]; // solo diez ciclos
-    private static int cantidad;
-    
-    public clsCicloDAO(){
-        objetos = new clsCiclo[cantidad];
-        cantidad = 0;
-        inicializarCiclo();
+
+    private static final int MAX_CI = 10;
+    private static clsCiclo[] ciclos = new clsCiclo[MAX_CI]; // solo diez ciclos
+    private static int cantidad = 0;
+
+    static {
+        inicializarDatos();
     }
-    
-    public static void agregar(clsCiclo clsCiclo){
-        
-        if (cantidad <=10 ){
-            objetos[cantidad] = clsCiclo;
+
+    private static void inicializarDatos() {
+
+        agregar(new clsCiclo(1, "2024-I", "01/03/2024", "31/07/2024", true));
+        agregar(new clsCiclo(2, "2024-I", "01/03/2024", "31/07/2024", true));
+        agregar(new clsCiclo(3, "2024-I", "01/03/2024", "31/07/2024", true));
+        agregar(new clsCiclo(4, "2024-I", "01/03/2024", "31/07/2024", true));
+        agregar(new clsCiclo(5, "2024-I", "01/03/2024", "31/07/2024", true));
+        agregar(new clsCiclo(6, "2024-I", "01/03/2024", "31/07/2024", true));
+        agregar(new clsCiclo(7, "2024-I", "01/03/2024", "31/07/2024", true));
+        agregar(new clsCiclo(8, "2024-I", "01/03/2024", "31/07/2024", true));
+        agregar(new clsCiclo(9, "2024-I", "01/03/2024", "31/07/2024", true));
+        agregar(new clsCiclo(10, "2024-I", "01/03/2024", "31/07/2024", true));
+    }
+
+    public static void agregar(clsCiclo objciclo) {
+
+        if (cantidad <= MAX_CI) {
+            ciclos[cantidad] = objciclo;
             cantidad++;
         }
     }
-    
-    // Inicializar ciclo
-    private void inicializarCiclo() {
 
-        agregar( new clsCiclo(1, "Ciclo-2025", "01/03/2025", "30/06/205", true, null));
-        agregar( new clsCiclo(2, "Ciclo-2025", "01/03/2025", "30/06/205", true, null));
-        agregar( new clsCiclo(3, "Ciclo-2025", "01/03/2025", "30/06/205", true, null));
-        agregar( new clsCiclo(4, "Ciclo-2025", "01/03/2025", "30/06/205", true, null));
-        agregar( new clsCiclo(5, "Ciclo-2025", "01/03/2025", "30/06/205", true, null));
-        
+    public static clsCiclo[] obtener() {
+        return ciclos;
     }
-    
-    public static clsCiclo[] obtener(){
-        return objetos;
-    }
-    
-    public static int getCantidad(){
+
+    public static int getCantidad() {
         return cantidad;
+    }
+
+    public static clsCiclo getElemento(int id) {
+
+        for (int i = 0; i < cantidad; i++) {
+
+            if (ciclos[i] != null && ciclos[i].getId() == id) {
+                return ciclos[i];
+            }
+        }
+        return null;
+    }
+
+    public static int posicion(int id) {
+
+        for (int i = 0; i < cantidad; i++) {
+
+            if (ciclos[i] != null && ciclos[i].getId() == id) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static void modificar(int pos, clsCiclo objCiclo) {
+
+        if (pos >= 0 && pos < cantidad) {
+            ciclos[pos] = objCiclo;
+        }
+    }
+
+    public static void darBaja(int pos) {
+
+        if (pos >= 0 && pos < cantidad) {
+            ciclos[pos].setEstado(false);
+        }
+    }
+    
+    public static void eliminar(int pos) {
+        
+        if (pos >= 0 && pos < cantidad) {
+            
+            for (int i = pos; i < cantidad - 1; i++) {
+                ciclos[i] = ciclos[i + 1];
+            }
+            ciclos[cantidad - 1] = null;
+            cantidad--;
+        }
     }
 }

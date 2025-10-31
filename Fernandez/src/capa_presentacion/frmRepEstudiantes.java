@@ -1,6 +1,11 @@
 
 package capa_presentacion;
 
+import capa_datos.clsEstudianteDAO;
+import capa_logica.clsEstudiante;
+import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Fernandez Reyes
@@ -15,6 +20,8 @@ public class frmRepEstudiantes extends javax.swing.JDialog {
     public frmRepEstudiantes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setIconImage( new ImageIcon("src/img/unprg.png").getImage());
+        listado();
     }
 
     /**
@@ -32,6 +39,8 @@ public class frmRepEstudiantes extends javax.swing.JDialog {
         btnCerrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle(".: Reporte de Estudiantes :.");
+        setBackground(new java.awt.Color(0, 102, 153));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 153));
@@ -63,14 +72,15 @@ public class frmRepEstudiantes extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(52, 52, 52)
                         .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35))
+                        .addGap(46, 46, 46))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 638, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,7 +102,42 @@ public class frmRepEstudiantes extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btnCerrarActionPerformed
 
-    
+    private void listado(){
+        
+        DefaultTableModel modelo = new DefaultTableModel();
+        
+        modelo.addColumn("Id");
+        modelo.addColumn("Nombres");
+        modelo.addColumn("Apellidos");
+        modelo.addColumn("Genero");
+        modelo.addColumn("Telefono");
+        modelo.addColumn("Direccion");
+        modelo.addColumn("Estado");
+        
+        clsEstudiante[] datos = clsEstudianteDAO.obtener();
+        int cantidad = clsEstudianteDAO.getCantidad();
+        
+        for (int i = 0; i < cantidad; i++) {
+            
+            clsEstudiante clsEst = datos[i];
+            
+            String estado = clsEst.isEstado() ? "Activo" : "Inactivo";
+            String sexo = clsEst.getSexo().equalsIgnoreCase("M") ? "Masculino" : "Femenino";
+            
+            modelo.addRow( new Object[] {
+                clsEst.getId(),
+                clsEst.getNombres(),
+                clsEst.getApellidos(),
+                sexo,
+                clsEst.getTelefono(),
+                clsEst.getDireccion(),
+                clsEst.isEstado(),
+                estado
+            });
+        }
+        
+        tblListado.setModel(modelo);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCerrar;

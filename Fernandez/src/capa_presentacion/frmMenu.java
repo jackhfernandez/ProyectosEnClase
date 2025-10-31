@@ -20,6 +20,7 @@ public class frmMenu extends javax.swing.JDialog {
         this.setResizable(false);
         jdInicioSesion objForm = new jdInicioSesion(null, true);
         objForm.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
         objForm.setResizable(false);
         objForm.setIconImage(new ImageIcon("src/img/unprg.png").getImage());
         this.setIconImage( new ImageIcon("src/img/unprg.png").getImage());
@@ -103,10 +104,20 @@ public class frmMenu extends javax.swing.JDialog {
 
         mnuRepEstudiantes.setForeground(new java.awt.Color(0, 102, 153));
         mnuRepEstudiantes.setText("Estudiantes");
+        mnuRepEstudiantes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuRepEstudiantesActionPerformed(evt);
+            }
+        });
         jMenu3.add(mnuRepEstudiantes);
 
         mnuRepCursos.setForeground(new java.awt.Color(0, 102, 153));
         mnuRepCursos.setText("Cursos");
+        mnuRepCursos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuRepCursosActionPerformed(evt);
+            }
+        });
         jMenu3.add(mnuRepCursos);
 
         jMenuBar1.add(jMenu3);
@@ -160,8 +171,25 @@ public class frmMenu extends javax.swing.JDialog {
     }//GEN-LAST:event_mnuManEstudianteActionPerformed
 
     private void mnuMantCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuMantCursosActionPerformed
-        
+
+        frmManCurso objForm = new frmManCurso(null, true);
+        objForm.setLocationRelativeTo(this);
+        objForm.setVisible(true);
     }//GEN-LAST:event_mnuMantCursosActionPerformed
+
+    private void mnuRepEstudiantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuRepEstudiantesActionPerformed
+
+        frmRepEstudiantes objForm = new frmRepEstudiantes(null, true);
+        objForm.setLocationRelativeTo(this);
+        objForm.setVisible(true);
+    }//GEN-LAST:event_mnuRepEstudiantesActionPerformed
+
+    private void mnuRepCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuRepCursosActionPerformed
+        
+        frmRepCursos objForm = new frmRepCursos(null, true);
+        objForm.setLocationRelativeTo(this);
+        objForm.setVisible(true);
+    }//GEN-LAST:event_mnuRepCursosActionPerformed
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

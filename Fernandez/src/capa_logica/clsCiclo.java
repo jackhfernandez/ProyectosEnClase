@@ -1,7 +1,5 @@
 package capa_logica;
 
-import java.util.Arrays;
-
 /**
  *
  * @author Fernandez Reyes
@@ -12,8 +10,7 @@ public class clsCiclo {
     private String nombre;
     private String fechaInicio;
     private String fechaFin;
-    private boolean activo;
-    private String[] cursos;
+    private boolean estado;
 
     public clsCiclo() {
 
@@ -21,18 +18,16 @@ public class clsCiclo {
         this.nombre = "";
         this.fechaInicio = "";
         this.fechaFin = "";
-        this.activo = false;
-        this.cursos = null;
+        this.estado = false;
     }
 
-    public clsCiclo(int id, String nombre, String fechaInicio, String fechaFin, boolean activo, String[] cursos) {
+    public clsCiclo(int id, String nombre, String fechaInicio, String fechaFin, boolean activo) {
 
         this.id = id;
         this.nombre = nombre;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
-        this.activo = activo;
-        this.cursos = cursos;
+        this.estado = activo;
     }
 
     public int getId() {
@@ -67,25 +62,17 @@ public class clsCiclo {
         this.fechaFin = fechaFin;
     }
 
-    public boolean isActivo() {
-        return activo;
+    public boolean isEstado() {
+        return estado;
     }
 
-    public void setActivo(boolean activo) {
-        this.activo = activo;
-    }
-
-    public String[] getCursos() {
-        return cursos;
-    }
-
-    public void setCursos(String[] cursos) {
-        this.cursos = cursos;
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
 
     @Override
     public String toString() {
-        return "\n\t" + id + "\n" + nombre + "\n" + fechaInicio + "\n" + fechaFin + "\n" + activo + "\n" + Arrays.toString(cursos);
+        return "\n\t" + id + "\n" + nombre + "\n" + fechaInicio + "\n" + fechaFin + "\n" + estado + "\n";
     }
     
 }
