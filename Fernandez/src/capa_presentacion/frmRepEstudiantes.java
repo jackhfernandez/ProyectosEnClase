@@ -1,4 +1,3 @@
-
 package capa_presentacion;
 
 import capa_datos.clsEstudianteDAO;
@@ -14,13 +13,14 @@ public class frmRepEstudiantes extends javax.swing.JDialog {
 
     /**
      * Creates new form frmRepEstudiantes
+     *
      * @param parent
      * @param modal
      */
     public frmRepEstudiantes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        this.setIconImage( new ImageIcon("src/img/unprg.png").getImage());
+        this.setIconImage(new ImageIcon("src/img/unprg.png").getImage());
         listado();
     }
 
@@ -102,10 +102,10 @@ public class frmRepEstudiantes extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btnCerrarActionPerformed
 
-    private void listado(){
-        
+    private void listado() {
+
         DefaultTableModel modelo = new DefaultTableModel();
-        
+
         modelo.addColumn("Id");
         modelo.addColumn("Nombres");
         modelo.addColumn("Apellidos");
@@ -113,29 +113,30 @@ public class frmRepEstudiantes extends javax.swing.JDialog {
         modelo.addColumn("Telefono");
         modelo.addColumn("Direccion");
         modelo.addColumn("Estado");
-        
+
         clsEstudiante[] datos = clsEstudianteDAO.obtener();
         int cantidad = clsEstudianteDAO.getCantidad();
-        
+
         for (int i = 0; i < cantidad; i++) {
-            
+
             clsEstudiante clsEst = datos[i];
-            
+
             String estado = clsEst.isEstado() ? "Activo" : "Inactivo";
-            String sexo = clsEst.getSexo().equalsIgnoreCase("M") ? "Masculino" : "Femenino";
+            String sexo = clsEst.getSexo().equalsIgnoreCase("M")
+                || clsEst.getSexo().equalsIgnoreCase("Masculino")
+                ? "Masculino" : "Femenino";
             
-            modelo.addRow( new Object[] {
+            modelo.addRow(new Object[]{
                 clsEst.getId(),
                 clsEst.getNombres(),
                 clsEst.getApellidos(),
                 sexo,
                 clsEst.getTelefono(),
                 clsEst.getDireccion(),
-                clsEst.isEstado(),
                 estado
             });
         }
-        
+
         tblListado.setModel(modelo);
     }
 

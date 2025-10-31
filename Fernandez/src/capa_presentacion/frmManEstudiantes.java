@@ -421,8 +421,7 @@ public class frmManEstudiantes extends javax.swing.JDialog {
             || grupoGenero.getSelection() == null
             || txtTelefono.getText().isEmpty()
             || txtDireccion.getText().isEmpty()
-            || chkEstado.isSelected() == false
-            ) {
+            || chkEstado.isSelected() == false) {
             JOptionPane.showMessageDialog(
                 this,
                 "Complete todos los campos",
@@ -433,8 +432,7 @@ public class frmManEstudiantes extends javax.swing.JDialog {
         } else {
 
             String sexo = rbtnMasculino.isSelected() ? "Masculino" : "Femenino";
-             
-            
+
             clsEstudiante objEst = new clsEstudiante(
                 Integer.parseInt(txtId.getText()),
                 txtNombres.getText().toUpperCase(),
@@ -469,9 +467,9 @@ public class frmManEstudiantes extends javax.swing.JDialog {
                 int pos = clsEstudianteDAO.posicion(Integer.parseInt(txtId.getText()));
 
                 if (pos != -1) {
-                    
-                    String sexo = rbtnMasculino.isSelected() ? "M" : "F";
-                    
+
+                    String sexo = rbtnMasculino.isSelected() ? "Masculino" : "Femenino";
+
                     clsEstudiante objEst = new clsEstudiante(
                         Integer.parseInt(txtId.getText()),
                         txtNombres.getText(),
@@ -560,7 +558,7 @@ public class frmManEstudiantes extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCerrarActionPerformed
 
     private void tblListadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblListadoMouseClicked
-        
+
         int fila = tblListado.getSelectedRow();
         String id = tblListado.getValueAt(fila, 0).toString();
         txtIdBuscar.setText(id);
@@ -588,7 +586,9 @@ public class frmManEstudiantes extends javax.swing.JDialog {
             clsEstudiante objEst = datos[i];
 
             String estado = objEst.isEstado() ? "Activo" : "Inactivo";
-            String sexo = objEst.getSexo().equalsIgnoreCase("M") ? "Masculino" : "Femenino";
+            String sexo = objEst.getSexo().equalsIgnoreCase("M")
+                || objEst.getSexo().equalsIgnoreCase("Masculino")
+                ? "Masculino" : "Femenino";
             
             modelo.addRow(new Object[]{
                 objEst.getId(),
