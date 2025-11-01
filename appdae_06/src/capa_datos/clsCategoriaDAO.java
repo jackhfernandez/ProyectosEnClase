@@ -1,0 +1,80 @@
+
+package capa_datos;
+
+import capa_logica.clsCategoria;
+
+/**
+ *
+ * @author Fernandez Reyes
+ */
+public class clsCategoriaDAO {
+    
+    private static clsCategoria[] objetos = new clsCategoria[20];
+    private static int cantidad;
+    
+    public clsCategoriaDAO(){
+        
+        cantidad = 0;
+    }
+    
+    public static void agregar(clsCategoria objCat){
+        
+        if (cantidad <=20 ) {
+            objetos[cantidad] = objCat;
+            cantidad++;
+        }
+    }
+    
+    public static clsCategoria[] obtener(){
+        
+        return objetos;
+    }
+    
+    public static int posicion(int codigo) {
+        
+        int pos = -1;
+        
+        for (int i = 0; i < cantidad; i++) {
+            
+            if (objetos[i].getCodigo() == codigo) {
+                pos = i;
+                break;
+            }
+        }
+        return pos;
+    }
+    
+    public static clsCategoria getElement(int codigo) {
+        
+        int pos = posicion(codigo);
+        
+        if (pos != -1) {
+            return objetos[pos];
+        } else {
+            return null;
+        }
+    }
+    
+    public static void darBaja(int pos) {
+        
+        objetos[pos].setEstado(false);
+    }
+    
+    public static void eliminar( int pos ) {
+        
+        for (int i = 0; i < cantidad; i++) {
+            
+            objetos[pos] = objetos[pos+1];
+        }
+        cantidad--;
+    }
+    
+    public static void modificar(int pos, clsCategoria objCat) {
+        
+        objetos[pos] = objCat;
+    }
+    
+    public static int getCantidad(){
+        return cantidad;
+    }
+}
