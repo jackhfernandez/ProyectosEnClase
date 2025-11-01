@@ -112,6 +112,7 @@ public class frmMenu extends javax.swing.JFrame {
         });
         jMenu2.add(mnuManCategorias);
 
+        mnuManProducto.setForeground(new java.awt.Color(0, 102, 153));
         mnuManProducto.setText("Producto");
         mnuManProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

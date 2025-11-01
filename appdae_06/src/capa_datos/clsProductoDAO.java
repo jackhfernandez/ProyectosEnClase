@@ -10,7 +10,7 @@ public class clsProductoDAO {
 
     private static final int MAX_PRO = 20;
     private static clsProducto[] objetos = new clsProducto[MAX_PRO];
-    private static int cantidad = 0;
+    private static int cantidad;
 
     public clsProductoDAO() {
         cantidad = 0;

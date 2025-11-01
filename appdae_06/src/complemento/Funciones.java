@@ -1,6 +1,8 @@
 package complemento;
 
+import capa_datos.clsCategoriaDAO;
 import capa_datos.clsMarcaDAO;
+import capa_logica.clsCategoria;
 import capa_logica.clsMarca;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -41,6 +43,24 @@ public class Funciones {
             combo.setModel(modeloMarca);
         } catch (Exception e ) {
             JOptionPane.showMessageDialog(null, e.getMessage() + " Error al cargar marcas en el sistema");
+        }
+    }
+    
+    public static void listarCategorias(JComboBox combo){
+        
+        DefaultComboBoxModel modeloCat = new DefaultComboBoxModel();
+        
+        try {
+            clsCategoria[] cat = clsCategoriaDAO.obtener();
+            int cantidad = clsCategoriaDAO.getCantidad();
+            
+            for (int i = 0; i < cantidad; i++) {
+                modeloCat.addElement( cat[i].getNombre());
+            }
+            
+            combo.setModel(modeloCat);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage() + "Error al cargar las categorias.");
         }
     }
 }
