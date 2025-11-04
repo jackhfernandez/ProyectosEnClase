@@ -1,10 +1,8 @@
 package capa_presentacion;
 
 import capa_datos.clsCategoriaDAO;
-import capa_datos.clsMarcaDAO;
 import capa_datos.clsProductoDAO;
 import capa_logica.clsCategoria;
-import capa_logica.clsMarca;
 import capa_logica.clsProducto;
 import complemento.Funciones;
 import javax.swing.JOptionPane;
@@ -26,6 +24,8 @@ public class frmManProducto extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         Funciones.listarMarcas(cboMarca);
+        Funciones.listarCategorias(cboMarca);
+        listado();
     }
 
     /**
@@ -410,13 +410,13 @@ public class frmManProducto extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDarBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDarBajaActionPerformed
-        
-        
+
+
     }//GEN-LAST:event_btnDarBajaActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        
-        
+
+
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -435,12 +435,24 @@ public class frmManProducto extends javax.swing.JDialog {
                 JOptionPane.ERROR_MESSAGE
             );
         } else {
-            clsCategoria objCat = clsCategoriaDAO.getElement(
+            int codigo = Integer.parseInt(txtCodigo.getText());
+            clsCategoria objProd = clsCategoriaDAO.getElement(
                 Integer.parseInt(txtCodigo.getText()));
-            txtCodigo.setText(String.valueOf(objCat.getCodigo()));
-            txtNombre.setText(objCat.getNombre());
-            txtDescripcion.setText(objCat.getDescripcion());
-            chkEstado.setSelected(objCat.isEstado());
+
+            if (objProd != null) {
+                txtCodigo.setText(String.valueOf(objProd.getCodigo()));
+                txtNombre.setText(objProd.getNombre());
+                txtDescripcion.setText(objProd.getDescripcion());
+                chkEstado.setSelected(objProd.isEstado());
+            } else {
+                JOptionPane.showMessageDialog(
+                    this,
+                    "No se encontro una marca con codigo " + codigo,
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+                );
+                limpiar();
+            }
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -491,15 +503,15 @@ public class frmManProducto extends javax.swing.JDialog {
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnNewCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewCategoriaActionPerformed
-        
+
         fmrManCategoria objCat = new fmrManCategoria(null, true);
         objCat.setLocationRelativeTo(this);
         objCat.setVisible(true);
     }//GEN-LAST:event_btnNewCategoriaActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        
-        
+
+
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void listado() {
@@ -547,9 +559,13 @@ public class frmManProducto extends javax.swing.JDialog {
         txtPrecio.setText("");
         spStock.setValue(0);
         chkEstado.setSelected(false);
-        // combos
-        cboCategoria.setSelectedIndex(0);
-        cboMarca.setSelectedIndex(0);
+        // verificar que los combos tengas elementos
+        if (cboCategoria.getItemCount() > 0) {
+            cboCategoria.setSelectedIndex(0);
+        }
+        if (cboMarca.getItemCount() > 0) {
+            cboMarca.setSelectedIndex(0);
+        }
         txtCodigo.requestFocus();
     }
 

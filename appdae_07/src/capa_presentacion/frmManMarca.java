@@ -22,7 +22,7 @@ public class frmManMarca extends javax.swing.JDialog {
     public frmManMarca(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        this.setIconImage( new ImageIcon("src/Recursos/unprg.png").getImage());
+        this.setIconImage(new ImageIcon("src/Recursos/unprg.png").getImage());
         listado();
     }
 
@@ -372,7 +372,7 @@ public class frmManMarca extends javax.swing.JDialog {
         if (!txtCodigo.getText().isEmpty()) {
 
             String cadena = "Estas seguro de modificar la marca " + txtNombre.getText() + "?";
-            
+
             int respuesta = Funciones.dialogoPregunta(cadena);
 
             if (respuesta == JOptionPane.YES_OPTION) {
@@ -476,13 +476,29 @@ public class frmManMarca extends javax.swing.JDialog {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
 
         if (txtCodigo.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Se requiere el codigo de la marca",
-                "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(
+                this,
+                "Se requiere el codigo de la marca",
+                "Error",
+                JOptionPane.ERROR_MESSAGE
+            );
         } else {
+            int codigo = Integer.parseInt(txtCodigo.getText());
             clsMarca objMarca = clsMarcaDAO.getElemento(Integer.parseInt(txtCodigo.getText()));
-            txtCodigo.setText(String.valueOf(objMarca.getCodigo()));
-            txtNombre.setText(objMarca.getNombre());
-            chkEstado.setSelected(objMarca.isEstado());
+
+            if (objMarca != null) {
+                txtCodigo.setText(String.valueOf(objMarca.getCodigo()));
+                txtNombre.setText(objMarca.getNombre());
+                chkEstado.setSelected(objMarca.isEstado());
+            } else {
+                JOptionPane.showMessageDialog(
+                    this,
+                    "No se encontro una marca con codigo " + codigo,
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+                );
+                limpiar();
+            }
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 

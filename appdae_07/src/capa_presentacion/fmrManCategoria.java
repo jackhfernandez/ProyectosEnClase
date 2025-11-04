@@ -367,11 +367,11 @@ public class fmrManCategoria extends javax.swing.JDialog {
         if (!txtCodigo.getText().isEmpty()) {
 
             String cadena = "¿Estas seguro de modificar la categoria " + txtNombre.getText() + "?";
-            
+
             int respuesta = Funciones.dialogoPregunta(cadena);
-            
+
             if (respuesta == JOptionPane.YES_OPTION) {
-                
+
                 int pos = clsCategoriaDAO.posicion(Integer.parseInt(txtCodigo.getText()));
 
                 if (pos != -1) {
@@ -451,31 +451,44 @@ public class fmrManCategoria extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        
+
         if (txtCodigo.getText().isEmpty()) {
-            
+
             JOptionPane.showMessageDialog(
                 this,
                 "Se requiere el codigo de la categoria",
                 "Error",
                 JOptionPane.ERROR_MESSAGE
-                );
+            );
         } else {
+
+            int codigo = Integer.parseInt(txtCodigo.getText());
             clsCategoria objCat = clsCategoriaDAO.getElement(
                 Integer.parseInt(txtCodigo.getText()));
+
+            if (objCat != null) {
                 txtCodigo.setText(String.valueOf(objCat.getCodigo()));
                 txtNombre.setText(objCat.getNombre());
                 txtDescripcion.setText(objCat.getDescripcion());
-                chkEstado.setSelected(objCat.isEstado());           
+                chkEstado.setSelected(objCat.isEstado());
+            } else {
+                JOptionPane.showMessageDialog(
+                    this,
+                    "No se encontro una marca con codigo " + codigo,
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+                );
+                limpiar();
+            }
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void tblCategoriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCategoriasMouseClicked
-        
+
         int fila = tblCategorias.getSelectedRow();
         String codigo = tblCategorias.getValueAt(fila, 0).toString();
         txtCodigo.setText(codigo);
-        
+
         btnBuscarActionPerformed(null);
     }//GEN-LAST:event_tblCategoriasMouseClicked
 
