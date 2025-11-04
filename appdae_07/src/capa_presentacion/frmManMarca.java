@@ -22,7 +22,7 @@ public class frmManMarca extends javax.swing.JDialog {
     public frmManMarca(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        this.setIconImage( new ImageIcon("src/icons/unprg.png").getImage());
+        this.setIconImage( new ImageIcon("src/Recursos/unprg.png").getImage());
         listado();
     }
 

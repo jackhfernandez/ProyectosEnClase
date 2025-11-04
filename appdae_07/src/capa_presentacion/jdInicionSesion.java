@@ -252,7 +252,7 @@ public class jdInicionSesion extends javax.swing.JDialog {
 
         try {
             // 1. En caso la imagen este en la ruta correcta
-            ImageIcon logo = new ImageIcon(getClass().getResource(("/icons/isotipo_unprg.png")));
+            ImageIcon logo = new ImageIcon(getClass().getResource(("/Recursos/isotipo_unprg.png")));
 
             // Redimensionar
             java.awt.Image img = logo.getImage();

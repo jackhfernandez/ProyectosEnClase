@@ -18,8 +18,8 @@ public class frmMenu extends javax.swing.JFrame {
         objForm.setLocationRelativeTo(objForm);
         this.setLocationRelativeTo(null);
         objForm.setResizable(false);
-        objForm.setIconImage( new ImageIcon("src/icons/unprg.png").getImage());
-        this.setIconImage( new ImageIcon("src/icons/unprg.png").getImage());
+        objForm.setIconImage( new ImageIcon("src/Recursos/unprg.png").getImage());
+        this.setIconImage( new ImageIcon("src/Recursos/unprg.png").getImage());
         objForm.setVisible(true);   
     }
 
