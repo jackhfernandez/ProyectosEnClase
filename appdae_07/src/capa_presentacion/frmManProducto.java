@@ -1,8 +1,6 @@
 package capa_presentacion;
 
-import capa_datos.clsCategoriaDAO;
 import capa_datos.clsProductoDAO;
-import capa_logica.clsCategoria;
 import capa_logica.clsProducto;
 import complemento.Funciones;
 import javax.swing.JOptionPane;
@@ -445,7 +443,44 @@ public class frmManProducto extends javax.swing.JDialog {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
 
-        
+        if (!txtCodigo.getText().isEmpty()) {
+
+            int pos = clsProductoDAO.posicion(Integer.parseInt(txtCodigo.getText()));
+
+            if (pos != -1) {
+
+                String cadena = "¿Estas seguro de eliminar la marca " + txtNombre.getText() + "?";
+
+                int respuesta = Funciones.dialogoPregunta(cadena);
+
+                if (respuesta == JOptionPane.YES_OPTION) {
+
+                    clsProductoDAO.eliminar(pos);
+                    JOptionPane.showMessageDialog(
+                        this,
+                        "Producto eliminada",
+                        "Mensaje",
+                        JOptionPane.INFORMATION_MESSAGE
+                    );
+                    listado();
+                    limpiar();
+                }
+            } else {
+                JOptionPane.showMessageDialog(
+                    this,
+                    "Producto no encontrado",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+                );
+            }
+        } else {
+            JOptionPane.showMessageDialog(
+                this,
+                "Se requiere el codigo del producto",
+                "Error",
+                JOptionPane.ERROR_MESSAGE
+            );
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -465,14 +500,18 @@ public class frmManProducto extends javax.swing.JDialog {
             );
         } else {
             int codigo = Integer.parseInt(txtCodigo.getText());
-            clsCategoria objProd = clsCategoriaDAO.getElement(
+            clsProducto objProd = clsProductoDAO.getElemento(
                 Integer.parseInt(txtCodigo.getText()));
 
             if (objProd != null) {
                 txtCodigo.setText(String.valueOf(objProd.getCodigo()));
                 txtNombre.setText(objProd.getNombre());
                 txtDescripcion.setText(objProd.getDescripcion());
+                txtPrecio.setText(String.valueOf(objProd.getPrecio()));
+                spStock.setValue(objProd.getStock());
                 chkEstado.setSelected(objProd.isEstado());
+                cboMarca.setSelectedItem(objProd.getNomMarca());
+                cboCategoria.setSelectedItem(objProd.getNomCategoria());
             } else {
                 JOptionPane.showMessageDialog(
                     this,
