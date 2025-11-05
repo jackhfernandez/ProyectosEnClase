@@ -2,7 +2,6 @@
 package capa_presentacion;
 
 import capa_datos.clsMarcaDAO;
-import capa_datos.clsUsuarioDAO;
 import capa_logica.clsMarca;
 import javax.swing.table.DefaultTableModel;
 
@@ -108,7 +107,7 @@ public class jdRepMarcas extends javax.swing.JDialog {
         modelo.addColumn("Estado");
         
         clsMarca[] datos = clsMarcaDAO.obtener();
-        int cantidad = clsUsuarioDAO.getCantidad();
+        int cantidad = clsMarcaDAO.getCantidad();
         
         for (int i = 0; i < cantidad; i++) {
             

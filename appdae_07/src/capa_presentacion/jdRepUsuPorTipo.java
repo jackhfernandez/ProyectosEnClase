@@ -18,6 +18,7 @@ public class jdRepUsuPorTipo extends javax.swing.JDialog {
     public jdRepUsuPorTipo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        listado();
     }
 
     /**

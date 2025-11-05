@@ -511,7 +511,66 @@ public class frmManProducto extends javax.swing.JDialog {
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
 
+        if (!txtCodigo.getText().isEmpty()) {
 
+            String cadena = "¿Estas seguro de modificar el producto " + txtNombre.getText() + "?";
+            int respuesta = Funciones.dialogoPregunta(cadena);
+
+            if (respuesta == JOptionPane.YES_OPTION) {
+
+                int pos = clsProductoDAO.posicion(Integer.parseInt(txtCodigo.getText()));
+
+                if (pos != -1) {
+
+                    int valorStock = (int) spStock.getValue();
+                    if (valorStock < 0) {
+                        JOptionPane.showMessageDialog(
+                            this,
+                            "El stock no puede ser negativo",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE
+                        );
+                        spStock.requestFocus();
+                        return;
+                    }
+
+                    clsProducto objProd = new clsProducto(
+                        Integer.parseInt(txtCodigo.getText()),
+                        txtNombre.getText().toUpperCase(),
+                        txtDescripcion.getText(),
+                        Double.parseDouble(txtPrecio.getText()),
+                        valorStock,
+                        chkEstado.isSelected(),
+                        cboMarca.getSelectedItem().toString(),
+                        cboCategoria.getSelectedItem().toString()
+                    );
+
+                    clsProductoDAO.modificar(pos, objProd);
+                    JOptionPane.showMessageDialog(
+                        this,
+                        "Producto Modificado",
+                        "Mensaje",
+                        JOptionPane.INFORMATION_MESSAGE
+                    );
+                    listado();
+                    limpiar();
+                } else {
+                    JOptionPane.showMessageDialog(
+                        this,
+                        "Producto no encontrado",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
+                    );
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(
+                this,
+                "Se requiere el codigo del producto",
+                "Error",
+                JOptionPane.ERROR_MESSAGE
+            );
+        }
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void listado() {
