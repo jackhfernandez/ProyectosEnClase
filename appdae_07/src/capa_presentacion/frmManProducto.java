@@ -411,12 +411,41 @@ public class frmManProducto extends javax.swing.JDialog {
 
     private void btnDarBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDarBajaActionPerformed
 
+        if (!txtCodigo.getText().isEmpty()) {
 
+            int pos = clsProductoDAO.posicion(Integer.parseInt(txtCodigo.getText()));
+
+            if (pos != -1) {
+                clsProductoDAO.darBaja(pos);
+                JOptionPane.showMessageDialog(
+                    this,
+                    "Producto dado de baja",
+                    "Mensaje",
+                    JOptionPane.INFORMATION_MESSAGE
+                );
+                listado();
+                limpiar();
+            } else {
+                JOptionPane.showMessageDialog(
+                    this,
+                    "Se requiere el codigo del producto",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+                );
+            }
+        } else {
+            JOptionPane.showMessageDialog(
+                this,
+                "Producto no encontrado",
+                "Error",
+                JOptionPane.ERROR_MESSAGE
+            );
+        }
     }//GEN-LAST:event_btnDarBajaActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
 
-
+        
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
