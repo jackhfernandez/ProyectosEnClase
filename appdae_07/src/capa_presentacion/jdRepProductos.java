@@ -1,22 +1,22 @@
 
 package capa_presentacion;
 
-import capa_datos.clsMarcaDAO;
-import capa_logica.clsMarca;
+import capa_datos.clsProductoDAO;
+import capa_logica.clsProducto;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Fernandez Reyes
  */
-public class jdRepMarcas extends javax.swing.JDialog {
+public class jdRepProductos extends javax.swing.JDialog {
 
     /**
-     * Creates new form jdRepMarcas
+     * Creates new form jdRepProductos
      * @param parent
      * @param modal
      */
-    public jdRepMarcas(java.awt.Frame parent, boolean modal) {
+    public jdRepProductos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         listado();
@@ -32,16 +32,24 @@ public class jdRepMarcas extends javax.swing.JDialog {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        btnCerrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblListado = new javax.swing.JTable();
-        btnCerrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle(".: Reporte de Marcas :.");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 153));
         jLabel1.setText("Lista de marcas");
+
+        btnCerrar.setForeground(new java.awt.Color(255, 0, 0));
+        btnCerrar.setText("Cerrar");
+        btnCerrar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 51, 51), 1, true));
+        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarActionPerformed(evt);
+            }
+        });
 
         tblListado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -53,15 +61,6 @@ public class jdRepMarcas extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(tblListado);
 
-        btnCerrar.setForeground(new java.awt.Color(255, 0, 0));
-        btnCerrar.setText("Cerrar");
-        btnCerrar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 51, 51), 1, true));
-        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCerrarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -69,12 +68,12 @@ public class jdRepMarcas extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(112, 112, 112)
+                .addGap(113, 113, 113)
                 .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(57, 57, 57))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 602, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -84,8 +83,8 @@ public class jdRepMarcas extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -93,35 +92,44 @@ public class jdRepMarcas extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
-        
+
         this.dispose();
     }//GEN-LAST:event_btnCerrarActionPerformed
 
     private void listado(){
         
         String estado;
+        
         DefaultTableModel modelo = new DefaultTableModel();
         
         modelo.addColumn("Codigo");
         modelo.addColumn("Nombre");
+        modelo.addColumn("Precio");
+        modelo.addColumn("Stock");
+        modelo.addColumn("Marca");
+        modelo.addColumn("Categoria");
         modelo.addColumn("Estado");
         
-        clsMarca[] datos = clsMarcaDAO.obtener();
-        int cantidad = clsMarcaDAO.getCantidad();
+        clsProducto[] datos = clsProductoDAO.obtener();
+        
+        int cantidad = clsProductoDAO.getCantidad();
         
         for (int i = 0; i < cantidad; i++) {
             
-            clsMarca objMarca = datos[i];
+            clsProducto objProd = datos[i];
             
-            estado = objMarca.isEstado() ? "Activo" : "Inactivo";
+            estado = objProd.isEstado() ? "Activo" : "Inactivo";
             
-            modelo.addRow(new Object[] {
-                objMarca.getCodigo(),
-                objMarca.getNombre(),
-                estado
+            modelo.addRow( new Object[] {
+                objProd.getCodigo(),
+                objProd.getNombre(),
+                objProd.getPrecio(),
+                objProd.getStock(),
+                objProd.getNomMarca(),
+                objProd.getNomCategoria(),
+                estado               
             });
         }
-        
         tblListado.setModel(modelo);
     }
 
