@@ -47,6 +47,7 @@ public class frmMenu extends javax.swing.JFrame {
         mnuRepUsuariosTipo = new javax.swing.JMenuItem();
         mnuRepMarcas = new javax.swing.JMenuItem();
         mnuRepCategorias = new javax.swing.JMenuItem();
+        jdRepProductos = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -166,6 +167,15 @@ public class frmMenu extends javax.swing.JFrame {
         });
         jMenu5.add(mnuRepCategorias);
 
+        jdRepProductos.setForeground(new java.awt.Color(0, 102, 153));
+        jdRepProductos.setText("Productos");
+        jdRepProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jdRepProductosActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jdRepProductos);
+
         jMenuBar1.add(jMenu5);
 
         jMenu4.setForeground(new java.awt.Color(0, 102, 153));
@@ -269,6 +279,13 @@ public class frmMenu extends javax.swing.JFrame {
         objForm.setLocationRelativeTo(this);
         objForm.setVisible(true);
     }//GEN-LAST:event_mnuManProductoActionPerformed
+
+    private void jdRepProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jdRepProductosActionPerformed
+        
+        jdRepProductos objForm = new jdRepProductos(this, true);
+        objForm.setLocationRelativeTo(this);
+        objForm.setVisible(true);
+    }//GEN-LAST:event_jdRepProductosActionPerformed
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
@@ -277,6 +294,7 @@ public class frmMenu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jdRepProductos;
     private javax.swing.JMenuItem mnuManCategorias;
     private javax.swing.JMenuItem mnuManMarcas;
     private javax.swing.JMenuItem mnuManProducto;
