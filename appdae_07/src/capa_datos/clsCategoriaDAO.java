@@ -17,12 +17,25 @@ public class clsCategoriaDAO {
         cantidad = 0;
     }
     
+    static {
+        inicializarDatos();
+    }
+    
     public static void agregar(clsCategoria objCat){
         
         if (cantidad <=20 ) {
             objetos[cantidad] = objCat;
             cantidad++;
         }
+    }
+    
+    private static void inicializarDatos(){
+        
+        agregar( new clsCategoria(1, "Tech", "Equipos tecnologicos", true));
+        agregar( new clsCategoria(2, "Home", "Equipos para el hogar", true));
+        agregar( new clsCategoria(3, "Electo", "Electrodomesticos", true));
+        agregar( new clsCategoria(4, "School", "Equipos para la escuela", true));
+        agregar( new clsCategoria(5, "Multimedia", "Social media", true));
     }
     
     public static clsCategoria[] obtener(){

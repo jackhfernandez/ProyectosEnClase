@@ -16,12 +16,30 @@ public class clsMarcaDAO {
         cantidad = 0;
     }
 
+    static {
+        inicializarDatos();
+    }
+    
     public static void agregar(clsMarca objMarca) {
 
         if (cantidad < 20) {
             objetos[cantidad] = objMarca;
             cantidad++;
         }
+    }
+    
+    private static void inicializarDatos(){
+        
+        agregar( new clsMarca(1, "Alienware", true));
+        agregar( new clsMarca(2, "Motorola", true));
+        agregar( new clsMarca(3, "Skullcandy", true));
+        agregar( new clsMarca(4, "Logitech", true));
+        agregar( new clsMarca(5, "Apple", true));
+        agregar( new clsMarca(6, "Samsung", true));
+        agregar( new clsMarca(7, "Nokia", true));
+        agregar( new clsMarca(8, "Lenovo", true));
+        agregar( new clsMarca(9, "Hp", true));
+        agregar( new clsMarca(10, "Compaq", true));
     }
 
     public static clsMarca[] obtener() {
