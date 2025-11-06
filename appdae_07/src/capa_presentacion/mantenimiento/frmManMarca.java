@@ -1,4 +1,4 @@
-package capa_presentacion;
+package capa_presentacion.mantenimiento;
 
 import capa_datos.clsMarcaDAO;
 import capa_logica.clsMarca;

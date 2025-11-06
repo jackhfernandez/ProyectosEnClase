@@ -1,22 +1,22 @@
 
-package capa_presentacion;
+package capa_presentacion.reportes;
 
-import capa_datos.clsCategoriaDAO;
-import capa_logica.clsCategoria;
+import capa_datos.clsMarcaDAO;
+import capa_logica.clsMarca;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Fernandez Reyes
  */
-public class jdRepCategorias extends javax.swing.JDialog {
+public class jdRepMarcas extends javax.swing.JDialog {
 
     /**
-     * Creates new form jdRepCategorias
+     * Creates new form jdRepMarcas
      * @param parent
      * @param modal
      */
-    public jdRepCategorias(java.awt.Frame parent, boolean modal) {
+    public jdRepMarcas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         listado();
@@ -37,11 +37,11 @@ public class jdRepCategorias extends javax.swing.JDialog {
         btnCerrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle(".: Reporte de categorias :.");
+        setTitle(".: Reporte de Marcas :.");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 153));
-        jLabel1.setText("Lista de Categorias");
+        jLabel1.setText("Lista de marcas");
 
         tblListado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -55,7 +55,6 @@ public class jdRepCategorias extends javax.swing.JDialog {
 
         btnCerrar.setForeground(new java.awt.Color(255, 0, 0));
         btnCerrar.setText("Cerrar");
-        btnCerrar.setToolTipText("");
         btnCerrar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 51, 51), 1, true));
         btnCerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,27 +66,26 @@ public class jdRepCategorias extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(112, 112, 112)
+                .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(57, 57, 57))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(7, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(58, 58, 58)
-                        .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(67, 67, 67))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 679, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 602, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
+                    .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -95,7 +93,7 @@ public class jdRepCategorias extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
-
+        
         this.dispose();
     }//GEN-LAST:event_btnCerrarActionPerformed
 
@@ -105,23 +103,21 @@ public class jdRepCategorias extends javax.swing.JDialog {
         DefaultTableModel modelo = new DefaultTableModel();
         
         modelo.addColumn("Codigo");
-        modelo.addColumn("Categoria");
-        modelo.addColumn("Descripcion");
+        modelo.addColumn("Nombre");
         modelo.addColumn("Estado");
         
-        clsCategoria[] datos = clsCategoriaDAO.obtener();
-        int cantidad = clsCategoriaDAO.getCantidad();
+        clsMarca[] datos = clsMarcaDAO.obtener();
+        int cantidad = clsMarcaDAO.getCantidad();
         
         for (int i = 0; i < cantidad; i++) {
             
-            clsCategoria clsCat = datos[i];
+            clsMarca objMarca = datos[i];
             
-            estado = clsCat.isEstado() ? "Activo" : "Inactivo";
+            estado = objMarca.isEstado() ? "Activo" : "Inactivo";
             
-            modelo.addRow( new Object[] {
-                clsCat.getCodigo(),
-                clsCat.getNombre(),
-                clsCat.getDescripcion(),
+            modelo.addRow(new Object[] {
+                objMarca.getCodigo(),
+                objMarca.getNombre(),
                 estado
             });
         }

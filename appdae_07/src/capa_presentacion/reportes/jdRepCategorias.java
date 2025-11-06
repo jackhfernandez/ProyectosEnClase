@@ -1,22 +1,22 @@
 
-package capa_presentacion;
+package capa_presentacion.reportes;
 
-import capa_datos.clsProductoDAO;
-import capa_logica.clsProducto;
+import capa_datos.clsCategoriaDAO;
+import capa_logica.clsCategoria;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Fernandez Reyes
  */
-public class jdRepProductos extends javax.swing.JDialog {
+public class jdRepCategorias extends javax.swing.JDialog {
 
     /**
-     * Creates new form jdRepProductos
+     * Creates new form jdRepCategorias
      * @param parent
      * @param modal
      */
-    public jdRepProductos(java.awt.Frame parent, boolean modal) {
+    public jdRepCategorias(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         listado();
@@ -32,24 +32,16 @@ public class jdRepProductos extends javax.swing.JDialog {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        btnCerrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblListado = new javax.swing.JTable();
+        btnCerrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle(".: Reporte de categorias :.");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 153));
-        jLabel1.setText("Lista de Productos");
-
-        btnCerrar.setForeground(new java.awt.Color(255, 0, 0));
-        btnCerrar.setText("Cerrar");
-        btnCerrar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 51, 51), 1, true));
-        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCerrarActionPerformed(evt);
-            }
-        });
+        jLabel1.setText("Lista de Categorias");
 
         tblListado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -61,30 +53,41 @@ public class jdRepProductos extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(tblListado);
 
+        btnCerrar.setForeground(new java.awt.Color(255, 0, 0));
+        btnCerrar.setText("Cerrar");
+        btnCerrar.setToolTipText("");
+        btnCerrar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 51, 51), 1, true));
+        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(113, 113, 113)
-                .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(7, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(58, 58, 58)
+                        .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(67, 67, 67))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 679, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(13, 13, 13)
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -99,37 +102,30 @@ public class jdRepProductos extends javax.swing.JDialog {
     private void listado(){
         
         String estado;
-        
         DefaultTableModel modelo = new DefaultTableModel();
         
         modelo.addColumn("Codigo");
-        modelo.addColumn("Nombre");
-        modelo.addColumn("Precio");
-        modelo.addColumn("Stock");
-        modelo.addColumn("Marca");
         modelo.addColumn("Categoria");
+        modelo.addColumn("Descripcion");
         modelo.addColumn("Estado");
         
-        clsProducto[] datos = clsProductoDAO.obtener();
-        
-        int cantidad = clsProductoDAO.getCantidad();
+        clsCategoria[] datos = clsCategoriaDAO.obtener();
+        int cantidad = clsCategoriaDAO.getCantidad();
         
         for (int i = 0; i < cantidad; i++) {
             
-            clsProducto objProd = datos[i];
+            clsCategoria clsCat = datos[i];
             
-            estado = objProd.isEstado() ? "Activo" : "Inactivo";
+            estado = clsCat.isEstado() ? "Activo" : "Inactivo";
             
             modelo.addRow( new Object[] {
-                objProd.getCodigo(),
-                objProd.getNombre(),
-                objProd.getPrecio(),
-                objProd.getStock(),
-                objProd.getNomMarca(),
-                objProd.getNomCategoria(),
-                estado               
+                clsCat.getCodigo(),
+                clsCat.getNombre(),
+                clsCat.getDescripcion(),
+                estado
             });
         }
+        
         tblListado.setModel(modelo);
     }
 

@@ -1,5 +1,7 @@
 package capa_presentacion;
 
+import capa_presentacion.mantenimiento.*;
+import capa_presentacion.reportes.*;
 import javax.swing.ImageIcon;
 
 /**
