@@ -77,15 +77,20 @@ public class frmManComprobante extends javax.swing.JDialog {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
+        jLabel1.setForeground(new java.awt.Color(0, 102, 153));
         jLabel1.setText("Fecha");
 
+        jLabel2.setForeground(new java.awt.Color(0, 102, 153));
         jLabel2.setText("Numero");
 
+        jTextField1.setForeground(new java.awt.Color(0, 102, 153));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
+
+        jTextField2.setForeground(new java.awt.Color(0, 102, 153));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/buscar1.png"))); // NOI18N
 
@@ -109,7 +114,7 @@ public class frmManComprobante extends javax.swing.JDialog {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(13, 13, 13)
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -117,28 +122,44 @@ public class frmManComprobante extends javax.swing.JDialog {
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel2)
                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
 
+        jLabel3.setForeground(new java.awt.Color(0, 102, 153));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("DNI / RUC");
 
+        jLabel4.setForeground(new java.awt.Color(0, 102, 153));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Cliente");
 
+        jLabel5.setForeground(new java.awt.Color(0, 102, 153));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Direccion");
 
+        jTextField3.setForeground(new java.awt.Color(0, 102, 153));
+
+        jTextField4.setForeground(new java.awt.Color(0, 102, 153));
+
+        jTextField5.setForeground(new java.awt.Color(0, 102, 153));
+
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/buscarCliente.png"))); // NOI18N
 
+        jTextField6.setForeground(new java.awt.Color(0, 102, 153));
+
+        jLabel6.setForeground(new java.awt.Color(0, 102, 153));
         jLabel6.setText("Tipo cliente");
 
+        jTextField7.setForeground(new java.awt.Color(0, 102, 153));
+
         rbtGrupoComprobante.add(jRadioButton1);
+        jRadioButton1.setForeground(new java.awt.Color(0, 102, 153));
         jRadioButton1.setText("Boleta");
 
         rbtGrupoComprobante.add(jRadioButton2);
+        jRadioButton2.setForeground(new java.awt.Color(0, 102, 153));
         jRadioButton2.setText("Factura");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -207,14 +228,23 @@ public class frmManComprobante extends javax.swing.JDialog {
 
         jPanel3.setBackground(new java.awt.Color(204, 255, 204));
 
+        jLabel7.setForeground(new java.awt.Color(0, 102, 153));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Producto");
 
+        jLabel8.setForeground(new java.awt.Color(0, 102, 153));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel8.setText("Cantidad");
 
+        jLabel9.setForeground(new java.awt.Color(0, 102, 153));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel9.setText("Descuento");
+
+        jTextField8.setForeground(new java.awt.Color(0, 102, 153));
+
+        jTextField9.setForeground(new java.awt.Color(0, 102, 153));
+
+        jTextField10.setForeground(new java.awt.Color(0, 102, 153));
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/agregar.png"))); // NOI18N
 
@@ -280,12 +310,21 @@ public class frmManComprobante extends javax.swing.JDialog {
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
+        jTextField11.setForeground(new java.awt.Color(0, 102, 153));
+
+        jTextField12.setForeground(new java.awt.Color(0, 102, 153));
+
+        jTextField13.setForeground(new java.awt.Color(0, 102, 153));
+
+        jLabel13.setForeground(new java.awt.Color(0, 102, 153));
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel13.setText("Subtotal");
 
+        jLabel14.setForeground(new java.awt.Color(0, 102, 153));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel14.setText("TOTAL");
 
+        jLabel15.setForeground(new java.awt.Color(0, 102, 153));
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel15.setText("IGV");
 
@@ -326,12 +365,15 @@ public class frmManComprobante extends javax.swing.JDialog {
 
         jPanel5.setBackground(new java.awt.Color(204, 204, 204));
 
+        jButton5.setForeground(new java.awt.Color(0, 102, 153));
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/guardar.png"))); // NOI18N
         jButton5.setText("Guardar");
 
+        jButton6.setForeground(new java.awt.Color(0, 102, 153));
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/limpiarMarca.png"))); // NOI18N
         jButton6.setText("Anular");
 
+        jButton7.setForeground(new java.awt.Color(0, 102, 153));
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/salirMarca.png"))); // NOI18N
         jButton7.setText("Salir");
 
@@ -356,7 +398,7 @@ public class frmManComprobante extends javax.swing.JDialog {
                 .addComponent(jButton6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton7)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -381,12 +423,11 @@ public class frmManComprobante extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         pack();
