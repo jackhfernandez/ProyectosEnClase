@@ -416,27 +416,27 @@ public class frmManProducto extends javax.swing.JDialog {
             if (pos != -1) {
                 clsProductoDAO.darBaja(pos);
                 JOptionPane.showMessageDialog(
-                    this,
-                    "Producto dado de baja",
-                    "Mensaje",
-                    JOptionPane.INFORMATION_MESSAGE
+                        this,
+                        "Producto dado de baja",
+                        "Mensaje",
+                        JOptionPane.INFORMATION_MESSAGE
                 );
                 listado();
                 limpiar();
             } else {
                 JOptionPane.showMessageDialog(
-                    this,
-                    "Se requiere el codigo del producto",
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE
+                        this,
+                        "Se requiere el codigo del producto",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
                 );
             }
         } else {
             JOptionPane.showMessageDialog(
-                this,
-                "Producto no encontrado",
-                "Error",
-                JOptionPane.ERROR_MESSAGE
+                    this,
+                    "Producto no encontrado",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
             );
         }
     }//GEN-LAST:event_btnDarBajaActionPerformed
@@ -457,28 +457,28 @@ public class frmManProducto extends javax.swing.JDialog {
 
                     clsProductoDAO.eliminar(pos);
                     JOptionPane.showMessageDialog(
-                        this,
-                        "Producto eliminada",
-                        "Mensaje",
-                        JOptionPane.INFORMATION_MESSAGE
+                            this,
+                            "Producto eliminada",
+                            "Mensaje",
+                            JOptionPane.INFORMATION_MESSAGE
                     );
                     listado();
                     limpiar();
                 }
             } else {
                 JOptionPane.showMessageDialog(
-                    this,
-                    "Producto no encontrado",
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE
+                        this,
+                        "Producto no encontrado",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
                 );
             }
         } else {
             JOptionPane.showMessageDialog(
-                this,
-                "Se requiere el codigo del producto",
-                "Error",
-                JOptionPane.ERROR_MESSAGE
+                    this,
+                    "Se requiere el codigo del producto",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
             );
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
@@ -493,15 +493,15 @@ public class frmManProducto extends javax.swing.JDialog {
         if (txtCodigo.getText().isEmpty()) {
 
             JOptionPane.showMessageDialog(
-                this,
-                "Se requiere el codigo de la categoria",
-                "Error",
-                JOptionPane.ERROR_MESSAGE
+                    this,
+                    "Se requiere el codigo de la categoria",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
             );
         } else {
             int codigo = Integer.parseInt(txtCodigo.getText());
             clsProducto objProd = clsProductoDAO.getElemento(
-                Integer.parseInt(txtCodigo.getText()));
+                    Integer.parseInt(txtCodigo.getText()));
 
             if (objProd != null) {
                 txtCodigo.setText(String.valueOf(objProd.getCodigo()));
@@ -514,10 +514,10 @@ public class frmManProducto extends javax.swing.JDialog {
                 cboCategoria.setSelectedItem(objProd.getNomCategoria());
             } else {
                 JOptionPane.showMessageDialog(
-                    this,
-                    "No se encontro una marca con codigo " + codigo,
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE
+                        this,
+                        "No se encontro una marca con codigo " + codigo,
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
                 );
                 limpiar();
             }
@@ -545,26 +545,26 @@ public class frmManProducto extends javax.swing.JDialog {
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
 
         if (txtCodigo.getText().isEmpty()
-            || txtNombre.getText().isEmpty()) {
+                || txtNombre.getText().isEmpty()) {
 
             JOptionPane.showMessageDialog(this, "Falta datos",
-                "Error", JOptionPane.ERROR_MESSAGE);
+                    "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             clsProducto objProd = new clsProducto(
-                Integer.parseInt(txtCodigo.getText()),
-                txtNombre.getText().toUpperCase(),
-                txtDescripcion.getText(),
-                Double.parseDouble(txtPrecio.getText()),
-                Integer.parseInt(spStock.getValue().toString()),
-                chkEstado.isSelected(),
-                cboMarca.getSelectedItem().toString(),
-                cboCategoria.getSelectedItem().toString()
+                    Integer.parseInt(txtCodigo.getText()),
+                    txtNombre.getText().toUpperCase(),
+                    txtDescripcion.getText(),
+                    Double.parseDouble(txtPrecio.getText()),
+                    Integer.parseInt(spStock.getValue().toString()),
+                    chkEstado.isSelected(),
+                    cboMarca.getSelectedItem().toString(),
+                    cboCategoria.getSelectedItem().toString()
             );
 
             clsProductoDAO.agregar(objProd);
             JOptionPane.showMessageDialog(this,
-                "Producto registrada en el sistema",
-                "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                    "Producto registrada en el sistema",
+                    "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             listado();
             limpiar();
         }
@@ -593,50 +593,50 @@ public class frmManProducto extends javax.swing.JDialog {
                     int valorStock = (int) spStock.getValue();
                     if (valorStock < 0) {
                         JOptionPane.showMessageDialog(
-                            this,
-                            "El stock no puede ser negativo",
-                            "Error",
-                            JOptionPane.ERROR_MESSAGE
+                                this,
+                                "El stock no puede ser negativo",
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE
                         );
                         spStock.requestFocus();
                         return;
                     }
 
                     clsProducto objProd = new clsProducto(
-                        Integer.parseInt(txtCodigo.getText()),
-                        txtNombre.getText().toUpperCase(),
-                        txtDescripcion.getText(),
-                        Double.parseDouble(txtPrecio.getText()),
-                        valorStock,
-                        chkEstado.isSelected(),
-                        cboMarca.getSelectedItem().toString(),
-                        cboCategoria.getSelectedItem().toString()
+                            Integer.parseInt(txtCodigo.getText()),
+                            txtNombre.getText().toUpperCase(),
+                            txtDescripcion.getText(),
+                            Double.parseDouble(txtPrecio.getText()),
+                            valorStock,
+                            chkEstado.isSelected(),
+                            cboMarca.getSelectedItem().toString(),
+                            cboCategoria.getSelectedItem().toString()
                     );
 
                     clsProductoDAO.modificar(pos, objProd);
                     JOptionPane.showMessageDialog(
-                        this,
-                        "Producto Modificado",
-                        "Mensaje",
-                        JOptionPane.INFORMATION_MESSAGE
+                            this,
+                            "Producto Modificado",
+                            "Mensaje",
+                            JOptionPane.INFORMATION_MESSAGE
                     );
                     listado();
                     limpiar();
                 } else {
                     JOptionPane.showMessageDialog(
-                        this,
-                        "Producto no encontrado",
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE
+                            this,
+                            "Producto no encontrado",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE
                     );
                 }
             }
         } else {
             JOptionPane.showMessageDialog(
-                this,
-                "Se requiere el codigo del producto",
-                "Error",
-                JOptionPane.ERROR_MESSAGE
+                    this,
+                    "Se requiere el codigo del producto",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
             );
         }
     }//GEN-LAST:event_btnModificarActionPerformed
@@ -646,6 +646,7 @@ public class frmManProducto extends javax.swing.JDialog {
         String estado;
 
         DefaultTableModel modelo = new DefaultTableModel();
+        modelo.setRowCount(0);
 
         modelo.addColumn("Codigo");
         modelo.addColumn("Nombre");
@@ -662,17 +663,20 @@ public class frmManProducto extends javax.swing.JDialog {
 
             clsProducto objProducto = datos[i];
 
-            estado = objProducto.isEstado() ? "Activo" : "Inactivo";
+            if (objProducto != null && objProducto.isEstado()) {
 
-            modelo.addRow(new Object[]{
-                objProducto.getCodigo(),
-                objProducto.getNombre(),
-                objProducto.getPrecio(),
-                objProducto.getStock(),
-                estado,
-                objProducto.getNomMarca(),
-                objProducto.getNomCategoria()
-            });
+                estado = objProducto.isEstado() ? "Activo" : "Inactivo";
+
+                modelo.addRow(new Object[]{
+                    objProducto.getCodigo(),
+                    objProducto.getNombre(),
+                    objProducto.getPrecio(),
+                    objProducto.getStock(),
+                    estado,
+                    objProducto.getNomMarca(),
+                    objProducto.getNomCategoria()
+                });
+            }
         }
 
         tblListado.setModel(modelo);

@@ -75,10 +75,11 @@ public class clsCategoriaDAO {
     
     public static void eliminar( int pos ) {
         
-        for (int i = 0; i < cantidad; i++) {
+        for (int i = pos; i < cantidad-1; i++) {
             
-            objetos[pos] = objetos[pos+1];
+            objetos[i] = objetos[i + 1];
         }
+        objetos[cantidad-1] = null;
         cantidad--;
     }
     

@@ -54,13 +54,23 @@ public class clsVentaDAO {
         }
     }
     
-    public static void darBaja(int pos) {
-        
-        objetos[pos].setEstado(false);
-    }
-    
     public static void eliminar(int pos) {
         
+        for (int i = pos; i < cantidad - 1; i++) {
+            
+            objetos[i] = objetos[i + 1];
+        }
+        objetos[cantidad-1] = null;
+        cantidad--;
+    }
+    
+    public static void modificar(int pos, clsVenta objVenta){
         
+        objetos[pos] = objVenta;
+    }
+    
+    public static int getCantidad(){
+        
+        return cantidad;
     }
 }

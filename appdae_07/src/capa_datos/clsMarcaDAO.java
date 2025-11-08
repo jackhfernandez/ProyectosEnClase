@@ -82,9 +82,14 @@ public class clsMarcaDAO {
     
     public static void eliminar( int pos){
         
-        for (int i = 0; i < cantidad; i++) {
-            objetos[pos] = objetos[pos+1];
+        if (pos < 0 || pos >= cantidad) {
+            return;
         }
+        
+        for (int i = pos; i < cantidad -1; i++) {
+            objetos[i] = objetos[i+1];
+        }
+        objetos[cantidad-1] = null;
         cantidad--;
     }
     
