@@ -288,29 +288,29 @@ public class fmrManCategoria extends javax.swing.JDialog {
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
 
         if (txtCodigo.getText().isEmpty()
-            || txtNombre.getText().isEmpty()) {
+                || txtNombre.getText().isEmpty()) {
 
             JOptionPane.showMessageDialog(
-                this,
-                "Falta datos",
-                "Error",
-                JOptionPane.ERROR_MESSAGE
+                    this,
+                    "Falta datos",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
             );
         } else {
             clsCategoria objCategoria = new clsCategoria(
-                Integer.parseInt(
-                    txtCodigo.getText()),
-                txtNombre.getText().toUpperCase(),
-                txtDescripcion.getText(),
-                chkEstado.isSelected()
+                    Integer.parseInt(
+                            txtCodigo.getText()),
+                    txtNombre.getText().toUpperCase(),
+                    txtDescripcion.getText(),
+                    chkEstado.isSelected()
             );
 
             clsCategoriaDAO.agregar(objCategoria);
             JOptionPane.showMessageDialog(
-                this,
-                "Categoria registrada en el sistema",
-                "Mensaje",
-                JOptionPane.INFORMATION_MESSAGE);
+                    this,
+                    "Categoria registrada en el sistema",
+                    "Mensaje",
+                    JOptionPane.INFORMATION_MESSAGE);
             listado();
             limpiar();
         }
@@ -336,28 +336,28 @@ public class fmrManCategoria extends javax.swing.JDialog {
 
                     clsCategoriaDAO.eliminar(pos);
                     JOptionPane.showMessageDialog(
-                        this,
-                        "Categoria Eliminada",
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE);
+                            this,
+                            "Categoria Eliminada",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE);
                     listado();
                     limpiar();
                 }
 
             } else {
                 JOptionPane.showMessageDialog(
-                    this,
-                    "Marca no encontrada",
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE
+                        this,
+                        "Marca no encontrada",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
                 );
             }
         } else {
             JOptionPane.showMessageDialog(
-                this,
-                "Se requiere el codigo de la categoria",
-                "Error",
-                JOptionPane.ERROR_MESSAGE
+                    this,
+                    "Se requiere el codigo de la categoria",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
             );
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
@@ -376,37 +376,37 @@ public class fmrManCategoria extends javax.swing.JDialog {
 
                 if (pos != -1) {
                     clsCategoria objCat = new clsCategoria(
-                        Integer.parseInt(txtCodigo.getText()),
-                        txtNombre.getText(),
-                        txtDescripcion.getText(),
-                        chkEstado.isSelected()
+                            Integer.parseInt(txtCodigo.getText()),
+                            txtNombre.getText(),
+                            txtDescripcion.getText(),
+                            chkEstado.isSelected()
                     );
 
                     clsCategoriaDAO.modificar(pos, objCat);
                     JOptionPane.showMessageDialog(
-                        this,
-                        "Categoria Modificada",
-                        "Mensaje",
-                        JOptionPane.INFORMATION_MESSAGE
+                            this,
+                            "Categoria Modificada",
+                            "Mensaje",
+                            JOptionPane.INFORMATION_MESSAGE
                     );
                     listado();
                     limpiar();
                 } else {
                     JOptionPane.showMessageDialog(
-                        this,
-                        "Categoria no encontrada",
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE
+                            this,
+                            "Categoria no encontrada",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE
                     );
                 }
             }
         } else {
 
             JOptionPane.showMessageDialog(
-                this,
-                "Se requiere el codigo de la categoria",
-                "Error",
-                JOptionPane.ERROR_MESSAGE
+                    this,
+                    "Se requiere el codigo de la categoria",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
             );
         }
     }//GEN-LAST:event_btnModificarActionPerformed
@@ -421,26 +421,26 @@ public class fmrManCategoria extends javax.swing.JDialog {
 
                 clsCategoriaDAO.darBaja(pos);
                 JOptionPane.showMessageDialog(
-                    this,
-                    "Categoria dada de baja",
-                    "Mensaje",
-                    JOptionPane.INFORMATION_MESSAGE
+                        this,
+                        "Categoria dada de baja",
+                        "Mensaje",
+                        JOptionPane.INFORMATION_MESSAGE
                 );
                 listado();
                 limpiar();
 
             } else {
                 JOptionPane.showMessageDialog(this,
-                    "Se requiere el codigo de la categoria",
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE
+                        "Se requiere el codigo de la categoria",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
                 );
             }
         } else {
             JOptionPane.showMessageDialog(this,
-                "Categoria no encontrada",
-                "Error",
-                JOptionPane.ERROR_MESSAGE
+                    "Categoria no encontrada",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
             );
         }
     }//GEN-LAST:event_btnDarBajaActionPerformed
@@ -455,16 +455,16 @@ public class fmrManCategoria extends javax.swing.JDialog {
         if (txtCodigo.getText().isEmpty()) {
 
             JOptionPane.showMessageDialog(
-                this,
-                "Se requiere el codigo de la categoria",
-                "Error",
-                JOptionPane.ERROR_MESSAGE
+                    this,
+                    "Se requiere el codigo de la categoria",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
             );
         } else {
 
             int codigo = Integer.parseInt(txtCodigo.getText());
             clsCategoria objCat = clsCategoriaDAO.getElement(
-                Integer.parseInt(txtCodigo.getText()));
+                    Integer.parseInt(txtCodigo.getText()));
 
             if (objCat != null) {
                 txtCodigo.setText(String.valueOf(objCat.getCodigo()));
@@ -473,10 +473,10 @@ public class fmrManCategoria extends javax.swing.JDialog {
                 chkEstado.setSelected(objCat.isEstado());
             } else {
                 JOptionPane.showMessageDialog(
-                    this,
-                    "No se encontro una marca con codigo " + codigo,
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE
+                        this,
+                        "No se encontro una marca con codigo " + codigo,
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
                 );
                 limpiar();
             }
@@ -510,14 +510,16 @@ public class fmrManCategoria extends javax.swing.JDialog {
 
             clsCategoria objCategoria = datos[i];
 
-            estado = objCategoria.isEstado() ? "Activo" : "Inactivo";
+            if (objCategoria != null) {
+                estado = objCategoria.isEstado() ? "Activo" : "Inactivo";
 
-            modelo.addRow(new Object[]{
-                objCategoria.getCodigo(),
-                objCategoria.getNombre(),
-                objCategoria.getDescripcion(),
-                estado
-            });
+                modelo.addRow(new Object[]{
+                    objCategoria.getCodigo(),
+                    objCategoria.getNombre(),
+                    objCategoria.getDescripcion(),
+                    estado
+                });
+            }
         }
 
         tblCategorias.setModel(modelo);

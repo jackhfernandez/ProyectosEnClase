@@ -13,10 +13,10 @@ public class clsProductoDAO {
     private static int cantidad;
 
     public clsProductoDAO() {
-        
+
         cantidad = 0;
     }
-    
+
     static {
         inicializarDatos();
     }
@@ -28,23 +28,23 @@ public class clsProductoDAO {
             cantidad++;
         }
     }
-    
-    private static void inicializarDatos(){
-        
-        agregar( new clsProducto(1, "Celular", "Cel importado", 1500, 10, true, "Motorola", "Tech"));
-        agregar( new clsProducto(2, "Audifono", "Aud canc ruido", 500, 10, true, "Skullcandy", "Tech"));
-        agregar( new clsProducto(3, "Mouse", "Mou ionic", 90, 10, true, "Logitech", "Tech"));
-        agregar( new clsProducto(4, "Laptop", "Lap gamer", 5500, 10, true, "Alienware", "Tech"));
-        agregar( new clsProducto(5, "Teclado", "Tecla mecanico", 150, 10, true, "Terabyte", "Tech"));
+
+    private static void inicializarDatos() {
+
+        agregar(new clsProducto(1, "Celular", "Cel importado", 1500, 10, true, "Motorola", "Tech"));
+        agregar(new clsProducto(2, "Audifono", "Aud canc ruido", 500, 10, true, "Skullcandy", "Tech"));
+        agregar(new clsProducto(3, "Mouse", "Mou ionic", 90, 10, true, "Logitech", "Tech"));
+        agregar(new clsProducto(4, "Laptop", "Lap gamer", 5500, 10, true, "Alienware", "Tech"));
+        agregar(new clsProducto(5, "Teclado", "Tecla mecanico", 150, 10, true, "Terabyte", "Tech"));
     }
 
     public static clsProducto[] obtener() {
-        
+
         return objetos;
     }
 
     public static int getCantidad() {
-        
+
         return cantidad;
     }
 
@@ -71,23 +71,27 @@ public class clsProductoDAO {
             return null;
         }
     }
-    
+
     public static void darBaja(int pos) {
-        
+
         objetos[pos].setEstado(false);
     }
-    
-    public static void eliminar( int pos) {
-        
-        for (int i = pos; i < cantidad -1; i++) {
-            objetos[i] = objetos[i + i];
+
+    public static void eliminar(int pos) {
+
+        if (pos < 0 || pos >= cantidad) {
+            return;
         }
-        objetos[cantidad-1] = null;
+
+        for (int i = pos; i < cantidad - 1; i++) {
+            objetos[i] = objetos[i + 1];
+        }
+        objetos[cantidad - 1] = null;
         cantidad--;
     }
-    
-    public static void  modificar(int pos, clsProducto objprod){
-        
+
+    public static void modificar(int pos, clsProducto objprod) {
+
         objetos[pos] = objprod;
     }
 }

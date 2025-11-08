@@ -315,21 +315,21 @@ public class frmManMarca extends javax.swing.JDialog {
     private void txtNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNuevoActionPerformed
 
         if (txtCodigo.getText().isEmpty()
-            || txtNombre.getText().isEmpty()) {
+                || txtNombre.getText().isEmpty()) {
 
             JOptionPane.showMessageDialog(this, "Falta datos",
-                "Error", JOptionPane.ERROR_MESSAGE);
+                    "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             clsMarca objMarca = new clsMarca(
-                Integer.parseInt(txtCodigo.getText()),
-                txtNombre.getText().toUpperCase(),
-                chkEstado.isSelected()
+                    Integer.parseInt(txtCodigo.getText()),
+                    txtNombre.getText().toUpperCase(),
+                    chkEstado.isSelected()
             );
 
             clsMarcaDAO.agregar(objMarca);
             JOptionPane.showMessageDialog(this,
-                "Marca registrada en el sistema",
-                "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                    "Marca registrada en el sistema",
+                    "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             listado();
             limpiar();
         }
@@ -381,30 +381,30 @@ public class frmManMarca extends javax.swing.JDialog {
 
                 if (pos != -1) {
                     clsMarca objMarca = new clsMarca(
-                        Integer.parseInt(txtCodigo.getText()),
-                        txtNombre.getText(),
-                        chkEstado.isSelected()
+                            Integer.parseInt(txtCodigo.getText()),
+                            txtNombre.getText(),
+                            chkEstado.isSelected()
                     );
                     clsMarcaDAO.modificar(pos, objMarca);
                     JOptionPane.showMessageDialog(this,
-                        "Marca modificada",
-                        "Mensaje",
-                        JOptionPane.INFORMATION_MESSAGE);
+                            "Marca modificada",
+                            "Mensaje",
+                            JOptionPane.INFORMATION_MESSAGE);
                     listado();
                     limpiar();
                 } else {
                     JOptionPane.showMessageDialog(this,
-                        "Marca no encontrada",
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE);
+                            "Marca no encontrada",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE);
                 }
             }
         } else {
 
             JOptionPane.showMessageDialog(this,
-                "Se requiere el codigo de la marca",
-                "Error",
-                JOptionPane.ERROR_MESSAGE
+                    "Se requiere el codigo de la marca",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
             );
         }
     }//GEN-LAST:event_btnModificarActionPerformed
@@ -418,17 +418,17 @@ public class frmManMarca extends javax.swing.JDialog {
             if (pos != -1) {
                 clsMarcaDAO.darBaja(pos);
                 JOptionPane.showMessageDialog(this, "Marca dada de baja",
-                    "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                        "Mensaje", JOptionPane.INFORMATION_MESSAGE);
                 listado();
                 limpiar();
             } else {
                 JOptionPane.showMessageDialog(this, "Se requiere el codigo de la marca",
-                    "Error", JOptionPane.ERROR_MESSAGE);
+                        "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(this,
-                "Marca no encontrada", "Error",
-                JOptionPane.ERROR_MESSAGE);
+                    "Marca no encontrada", "Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnDarBajaActionPerformed
 
@@ -450,9 +450,15 @@ public class frmManMarca extends javax.swing.JDialog {
 
             clsMarca objMarca = datos[i];
 
-            estado = objMarca.isEstado() ? "Activo" : "Inactivo";
+            if (objMarca != null) {
+                estado = objMarca.isEstado() ? "Activo" : "Inactivo";
 
-            modelo.addRow(new Object[]{objMarca.getCodigo(), objMarca.getNombre(), estado});
+                modelo.addRow(new Object[]{
+                    objMarca.getCodigo(),
+                    objMarca.getNombre(),
+                    estado
+                });
+            }
         }
 
         // asignar el modelo al table
@@ -477,10 +483,10 @@ public class frmManMarca extends javax.swing.JDialog {
 
         if (txtCodigo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(
-                this,
-                "Se requiere el codigo de la marca",
-                "Error",
-                JOptionPane.ERROR_MESSAGE
+                    this,
+                    "Se requiere el codigo de la marca",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
             );
         } else {
             int codigo = Integer.parseInt(txtCodigo.getText());
@@ -492,10 +498,10 @@ public class frmManMarca extends javax.swing.JDialog {
                 chkEstado.setSelected(objMarca.isEstado());
             } else {
                 JOptionPane.showMessageDialog(
-                    this,
-                    "No se encontro una marca con codigo " + codigo,
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE
+                        this,
+                        "No se encontro una marca con codigo " + codigo,
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
                 );
                 limpiar();
             }

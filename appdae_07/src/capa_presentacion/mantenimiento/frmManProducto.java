@@ -342,6 +342,11 @@ public class frmManProducto extends javax.swing.JDialog {
             }
         ));
         tblListado.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tblListado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblListadoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblListado);
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -395,7 +400,7 @@ public class frmManProducto extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 646, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -458,7 +463,7 @@ public class frmManProducto extends javax.swing.JDialog {
                     clsProductoDAO.eliminar(pos);
                     JOptionPane.showMessageDialog(
                             this,
-                            "Producto eliminada",
+                            "Producto eliminado",
                             "Mensaje",
                             JOptionPane.INFORMATION_MESSAGE
                     );
@@ -641,6 +646,15 @@ public class frmManProducto extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnModificarActionPerformed
 
+    private void tblListadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblListadoMouseClicked
+
+        int fila = tblListado.getSelectedRow();
+        String codigo = tblListado.getValueAt(fila, 0).toString();
+        txtCodigo.setText(codigo);
+
+        btnBuscarActionPerformed(null);
+    }//GEN-LAST:event_tblListadoMouseClicked
+
     private void listado() {
 
         String estado;
@@ -663,7 +677,7 @@ public class frmManProducto extends javax.swing.JDialog {
 
             clsProducto objProducto = datos[i];
 
-            if (objProducto != null && objProducto.isEstado()) {
+            if (objProducto != null) {
 
                 estado = objProducto.isEstado() ? "Activo" : "Inactivo";
 
