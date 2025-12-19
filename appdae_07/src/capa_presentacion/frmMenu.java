@@ -43,6 +43,7 @@ public class frmMenu extends javax.swing.JFrame {
         mnuManMarcas = new javax.swing.JMenuItem();
         mnuManCategorias = new javax.swing.JMenuItem();
         mnuManProducto = new javax.swing.JMenuItem();
+        mnuManCliente = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         mnuOpVenta = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
@@ -124,6 +125,15 @@ public class frmMenu extends javax.swing.JFrame {
             }
         });
         jMenu2.add(mnuManProducto);
+
+        mnuManCliente.setForeground(new java.awt.Color(0, 102, 153));
+        mnuManCliente.setText("Cliente");
+        mnuManCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuManClienteActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mnuManCliente);
 
         jMenuBar1.add(jMenu2);
 
@@ -302,10 +312,16 @@ public class frmMenu extends javax.swing.JFrame {
 
     private void mnuOpVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuOpVentaActionPerformed
         
-        frmManComprobante objForm = new frmManComprobante(this, true);
+        jdVenta objForm = new jdVenta(this, true);
         objForm.setLocationRelativeTo(this);
         objForm.setVisible(true);
     }//GEN-LAST:event_mnuOpVentaActionPerformed
+
+    private void mnuManClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuManClienteActionPerformed
+        frmManCliente objForm = new frmManCliente(this, true);
+        objForm.setLocationRelativeTo(this);
+        objForm.setVisible(true);
+    }//GEN-LAST:event_mnuManClienteActionPerformed
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
@@ -316,6 +332,7 @@ public class frmMenu extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jdRepProductos;
     private javax.swing.JMenuItem mnuManCategorias;
+    private javax.swing.JMenuItem mnuManCliente;
     private javax.swing.JMenuItem mnuManMarcas;
     private javax.swing.JMenuItem mnuManProducto;
     private javax.swing.JMenuItem mnuManUsuarios;
