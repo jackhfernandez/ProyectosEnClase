@@ -8,8 +8,8 @@ package capa_logica;
 public class clsCliente {
     private int id;
     private String documento;
-    private String tipoCliente;
     private String nombre;
+    private String tipoCliente;
     private String tipoComprobante;
     private String direccion;
     private boolean estado;
@@ -17,18 +17,18 @@ public class clsCliente {
     public clsCliente() {
         this.id = 0;
         this.documento = "";
-        this.tipoCliente = "";
         this.nombre = "";
+        this.tipoCliente = "";
         this.tipoComprobante = "";
         this.direccion = "";
         this.estado = false;
     }
 
-    public clsCliente(int id, String documento, String tipoCliente, String nombre, String tipoComprobante, String direccion, boolean estado) {
+    public clsCliente(int id, String documento, String nombre, String tipoCliente, String tipoComprobante, String direccion, boolean estado) {
         this.id = id;
         this.documento = documento;
-        this.tipoCliente = tipoCliente;
         this.nombre = nombre;
+        this.tipoCliente = tipoCliente;
         this.tipoComprobante = tipoComprobante;
         this.direccion = direccion;
         this.estado = estado;

@@ -148,7 +148,7 @@ public class frmManCliente extends javax.swing.JDialog {
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setForeground(new java.awt.Color(0, 102, 153));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("DOUMENTO");
+        jLabel3.setText("DOCUMENTO");
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setForeground(new java.awt.Color(0, 102, 153));
@@ -429,17 +429,16 @@ public class frmManCliente extends javax.swing.JDialog {
         for (int i = 0; i < cantidad; i++) {
             clsCliente objCli = datos[i];
             String estado = objCli.isEstado() ? "Activo" : "Inactivo";
-            String tipoCliente = objCli.getTipoCliente()
+            String cliente = objCli.getTipoCliente()
                 .equalsIgnoreCase("empresa") ? "empresa" : "persona natural";
-            String tipoComprobante = objCli.getTipoComprobante()
+            String comprobante = objCli.getTipoComprobante()
                 .equalsIgnoreCase("Boleta") ? "Boleta" : "Factura";
 
             modelo.addRow(new Object[]{
                 objCli.getId(),
-                objCli.getDocumento(),
                 objCli.getNombre(),
-                tipoCliente,
-                tipoComprobante,
+                cliente,
+                comprobante,
                 estado
             });
         }
@@ -487,7 +486,7 @@ public class frmManCliente extends javax.swing.JDialog {
             || tipoCliente.getSelection() == null
             || tipoComprobante.getSelection() == null
             || txtDireccion.getText().isEmpty()
-            || chkEstado.isSelected() == false) {
+            ) {
             JOptionPane.showMessageDialog(
                 this,
                 "Complete todos los campos",
@@ -495,8 +494,8 @@ public class frmManCliente extends javax.swing.JDialog {
                 JOptionPane.ERROR_MESSAGE
             );
         } else {
-            String cliente = rbtnEmpresa.isSelected() ? "empresa" : "persona natural";
-            String comprobante = rbtnFactura.isSelected() ? "factura" : "boleta";
+            String cliente = rbtnEmpresa.isSelected() ? "empresa" :  "persona natural";
+            String comprobante = rbtnFactura.isSelected() ? "factura" :  "boleta";
 
             clsCliente objCli = new clsCliente(
                 Integer.parseInt(txtId.getText()),
@@ -529,12 +528,15 @@ public class frmManCliente extends javax.swing.JDialog {
                 int pos = clsClienteDAO.posicion(Integer.parseInt(txtId.getText()));
 
                 if (pos != -1) {
+                    String cliente = rbtnEmpresa.isSelected() ? "empresa" : "persona natural";
+                    String comprobante = rbtnFactura.isSelected() ? "factura" : "boleta";
+                    
                     clsCliente objCli = new clsCliente(
                         Integer.parseInt(txtId.getText()),
                         txtDocumento.getText(),
                         txtNombre.getText(),
-                        tipoComprobante.getSelection().toString(),
-                        tipoCliente.getSelection().toString(),
+                        cliente,
+                        comprobante,
                         txtDireccion.getText(),
                         chkEstado.isSelected()
                     );
@@ -596,7 +598,7 @@ public class frmManCliente extends javax.swing.JDialog {
         } else {
             JOptionPane.showMessageDialog(
                 this,
-                "Se requiere el CODIGOG del cliente",
+                "Se requiere el CODIGO del cliente",
                 "Error",
                 JOptionPane.ERROR_MESSAGE
             );

@@ -28,12 +28,12 @@ public class clsClienteDAO {
     }
 
     public static void inicializarDatos() {
-        agregar(new clsCliente(1, "60606060", "persona natural", "Roberto Carlos", "boleta", "avenida 123", true));
-        agregar(new clsCliente(2, "60606061", "persona natural", "Roberto Carlos", "boleta", "avenida 123", true));
-        agregar(new clsCliente(3, "60606062", "persona natural", "Roberto Carlos", "boleta", "avenida 123", true));
-        agregar(new clsCliente(4, "20112020111", "empresa", "Empresa A", "factura", "avenida 123", true));
-        agregar(new clsCliente(5, "20112020112", "empresa", "Empresa B", "factura", "avenida 123", true));
-        agregar( new clsCliente(6, "20112020113", "empresa", "Empresa C", "factura", "avenida", true));
+        agregar(new clsCliente(1, "60606060", "Roberto Carlos", "persona natural", "boleta", "avenida 123", true));
+        agregar(new clsCliente(2, "60606061", "Roberto Carlos", "persona natural", "boleta", "avenida 123", true));
+        agregar(new clsCliente(3, "60606062", "Roberto Carlos", "persona natural", "boleta", "avenida 123", true));
+        agregar(new clsCliente(4, "20112020111", "Empresa A", "empresa", "factura", "avenida 123", true));
+        agregar(new clsCliente(5, "20112020112", "Empresa B", "empresa", "factura", "avenida 123", true));
+        agregar(new clsCliente(6, "20112020113", "Empresa C", "empresa", "factura", "avenida", true));
     }
     
     public static clsCliente[] obtener(){
