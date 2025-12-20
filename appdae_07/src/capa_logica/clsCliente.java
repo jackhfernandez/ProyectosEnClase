@@ -7,7 +7,7 @@ package capa_logica;
  */
 public class clsCliente {
     private int id;
-    private String documento;
+    private int documento;
     private String nombre;
     private String tipoCliente;
     private String tipoComprobante;
@@ -16,7 +16,7 @@ public class clsCliente {
 
     public clsCliente() {
         this.id = 0;
-        this.documento = "";
+        this.documento = 0;
         this.nombre = "";
         this.tipoCliente = "";
         this.tipoComprobante = "";
@@ -24,7 +24,7 @@ public class clsCliente {
         this.estado = false;
     }
 
-    public clsCliente(int id, String documento, String nombre, String tipoCliente, String tipoComprobante, String direccion, boolean estado) {
+    public clsCliente(int id, int documento, String nombre, String tipoCliente, String tipoComprobante, String direccion, boolean estado) {
         this.id = id;
         this.documento = documento;
         this.nombre = nombre;
@@ -42,11 +42,11 @@ public class clsCliente {
         this.id = id;
     }
 
-    public String getDocumento() {
+    public int getDocumento() {
         return documento;
     }
 
-    public void setDocumento(String documento) {
+    public void setDocumento(int documento) {
         this.documento = documento;
     }
 

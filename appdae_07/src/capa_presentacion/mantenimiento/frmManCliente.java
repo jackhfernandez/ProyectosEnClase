@@ -385,7 +385,7 @@ public class frmManCliente extends javax.swing.JDialog {
 
             if (objCli != null) {
                 txtId.setText(String.valueOf(objCli.getId()));
-                txtDocumento.setText(objCli.getDocumento());
+                txtDocumento.setText(String.valueOf(objCli.getDocumento()));
                 txtNombre.setText(objCli.getNombre());
 
                 if (objCli.getTipoCliente().equalsIgnoreCase("persona natural")) {
@@ -499,7 +499,7 @@ public class frmManCliente extends javax.swing.JDialog {
 
             clsCliente objCli = new clsCliente(
                 Integer.parseInt(txtId.getText()),
-                txtDocumento.getText(),
+                Integer.parseInt(txtDocumento.getText()),
                 txtNombre.getText(),
                 cliente,
                 comprobante,
@@ -533,7 +533,7 @@ public class frmManCliente extends javax.swing.JDialog {
                     
                     clsCliente objCli = new clsCliente(
                         Integer.parseInt(txtId.getText()),
-                        txtDocumento.getText(),
+                        Integer.parseInt(txtDocumento.getText()),
                         txtNombre.getText(),
                         cliente,
                         comprobante,

@@ -94,4 +94,32 @@ public class clsProductoDAO {
 
         objetos[pos] = objprod;
     }
+    
+    public static clsProducto[] productosxIniciales( String texto) {
+        int cantReg = 0;
+        
+        int canLetras = texto.length();
+        
+        for (int i = 0; i < cantidad; i++) {
+            String nombProd = objetos[i].getNombre().substring(0, canLetras);
+            if (nombProd.equalsIgnoreCase(texto)) {
+                cantReg = cantReg + 1;
+            }
+        }
+        
+        clsProducto[] datos = null;
+        if (cantReg > 0) {
+            datos = new clsProducto[cantReg];
+            int c = 0;
+            
+            for (int i = 0; i < cantidad; i++) {
+                String nombProd = objetos[i].getNombre().substring(0, canLetras);
+                if (nombProd.equalsIgnoreCase(texto)) {
+                    datos[c] = objetos[i];
+                    c++;
+                }
+            }
+        }
+        return datos;
+    }
 }
