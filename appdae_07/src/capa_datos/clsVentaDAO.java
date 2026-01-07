@@ -29,7 +29,7 @@ public class clsVentaDAO {
         return objetos;
     }
     
-    public static int posicion(int numero) {
+    /*public static int posicion(int numero) {
         
         int pos = -1;
         
@@ -52,7 +52,7 @@ public class clsVentaDAO {
         } else {
             return null;
         }
-    }
+    }*/
     
     public static void eliminar(int pos) {
         

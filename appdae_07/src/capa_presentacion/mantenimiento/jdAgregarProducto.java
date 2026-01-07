@@ -1,4 +1,3 @@
-
 package capa_presentacion.mantenimiento;
 
 import capa_datos.clsProductoDAO;
@@ -15,13 +14,14 @@ public class jdAgregarProducto extends javax.swing.JDialog {
     private int prod = 0;
     private int cant = 0;
     private int desc = 0;
-    
+
     /**
      * Creates new form jdAgregarProducto
      */
     public jdAgregarProducto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        listarProductos();
     }
 
     /**
@@ -36,8 +36,10 @@ public class jdAgregarProducto extends javax.swing.JDialog {
         txtNombreProducto = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProductos = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle(".: Agregar productos :.");
 
         txtNombreProducto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -60,21 +62,33 @@ public class jdAgregarProducto extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(tblProductos);
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 102, 153));
+        jLabel1.setText("Ingrese nombre del producto");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtNombreProducto)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(80, 80, 80))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(183, 183, 183)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(5, 5, 5)
                 .addComponent(txtNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -88,8 +102,8 @@ public class jdAgregarProducto extends javax.swing.JDialog {
                 prod = cod;
                 cant = ctd;
                 String descuento = String.valueOf(JOptionPane.showInputDialog(rootPane,
-                        "Ingrese el porcentaje de descuento: ", "0"));
-                
+                    "Ingrese el porcentaje de descuento: ", "0"));
+
                 try {
                     desc = Integer.parseInt(descuento);
                 } catch (Exception e) {
@@ -102,7 +116,7 @@ public class jdAgregarProducto extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(rootPane, e.getMessage());
         }
     }
-    
+
     public int getProd() {
         return prod;
     }
@@ -126,21 +140,21 @@ public class jdAgregarProducto extends javax.swing.JDialog {
     public void setDesc(int desc) {
         this.desc = desc;
     }
-    
-    
+
+
     private void txtNombreProductoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreProductoKeyReleased
         listarProductos();
     }//GEN-LAST:event_txtNombreProductoKeyReleased
 
     private void tblProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductosMouseClicked
         int cod = Integer.parseInt(String.valueOf(tblProductos.getValueAt(tblProductos.getSelectedRow(), 0)));
-        
-        String ctd = String.valueOf(JOptionPane.showInputDialog(rootPane, "Ingrese la cantidad: "));
+
+        String ctd = JOptionPane.showInputDialog(rootPane, "Ingrese la cantidad: ");
         
         if (ctd != "null") {
             try {
                 pasarDatos(cod, Integer.parseInt(ctd));
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(rootPane, "Cantidad no valida");
             }
         }
@@ -148,9 +162,9 @@ public class jdAgregarProducto extends javax.swing.JDialog {
 
     private void listarProductos() {
         String estado;
-        
+
         DefaultTableModel modelo = new DefaultTableModel();
-        
+
         modelo.addColumn("Codigo");
         modelo.addColumn("Nombre");
         modelo.addColumn("Precio");
@@ -158,20 +172,20 @@ public class jdAgregarProducto extends javax.swing.JDialog {
         modelo.addColumn("Estado");
         modelo.addColumn("Marca");
         modelo.addColumn("Categoria");
-        
+
         int cantidad;
-        clsProducto[] datos  = clsProductoDAO.productosxIniciales(txtNombreProducto.getText());
+        clsProducto[] datos = clsProductoDAO.productosxIniciales(txtNombreProducto.getText());
         if (datos == null) {
             cantidad = 0;
         } else {
             cantidad = datos.length;
         }
-        
+
         for (int i = 0; i < cantidad; i++) {
             clsProducto objPro = datos[i];
             estado = objPro.isEstado() ? "Activo" : "Inactivo";
-            
-            modelo.addRow(new Object[] {
+
+            modelo.addRow(new Object[]{
                 objPro.getCodigo(),
                 objPro.getNombre(),
                 objPro.getPrecio(),
@@ -185,6 +199,7 @@ public class jdAgregarProducto extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblProductos;
     private javax.swing.JTextField txtNombreProducto;
