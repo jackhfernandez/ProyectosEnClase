@@ -52,6 +52,7 @@ public class frmMenu extends javax.swing.JFrame {
         mnuRepMarcas = new javax.swing.JMenuItem();
         mnuRepCategorias = new javax.swing.JMenuItem();
         jdRepProductos = new javax.swing.JMenuItem();
+        mnuRepVentas = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -199,6 +200,15 @@ public class frmMenu extends javax.swing.JFrame {
         });
         jMenu5.add(jdRepProductos);
 
+        mnuRepVentas.setForeground(new java.awt.Color(0, 102, 153));
+        mnuRepVentas.setText("Ventas");
+        mnuRepVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuRepVentasActionPerformed(evt);
+            }
+        });
+        jMenu5.add(mnuRepVentas);
+
         jMenuBar1.add(jMenu5);
 
         jMenu4.setForeground(new java.awt.Color(0, 102, 153));
@@ -322,6 +332,12 @@ public class frmMenu extends javax.swing.JFrame {
         objForm.setLocationRelativeTo(this);
         objForm.setVisible(true);
     }//GEN-LAST:event_mnuManClienteActionPerformed
+
+    private void mnuRepVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuRepVentasActionPerformed
+        jdRepVentas objForm = new jdRepVentas(this, true);
+        objForm.setLocationRelativeTo(this);
+        objForm.setVisible(true);
+    }//GEN-LAST:event_mnuRepVentasActionPerformed
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
@@ -341,6 +357,7 @@ public class frmMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnuRepMarcas;
     private javax.swing.JMenuItem mnuRepUsuarios;
     private javax.swing.JMenuItem mnuRepUsuariosTipo;
+    private javax.swing.JMenuItem mnuRepVentas;
     private javax.swing.JMenuItem mnuSistemaCerrarSesion;
     private javax.swing.JMenuItem mnuSistemaSalir;
     // End of variables declaration//GEN-END:variables

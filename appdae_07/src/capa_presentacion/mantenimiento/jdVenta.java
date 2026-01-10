@@ -1,6 +1,6 @@
-
 package capa_presentacion.mantenimiento;
 
+import Contenedor.ContenedorVentas;
 import capa_datos.clsClienteDAO;
 import capa_datos.clsProductoDAO;
 import capa_logica.clsCliente;
@@ -23,7 +23,7 @@ public class jdVenta extends javax.swing.JDialog {
 
     /**
      * Creates new form frmManComprobante
-     * 
+     *
      * @param parent
      * @param modal
      */
@@ -491,21 +491,21 @@ public class jdVenta extends javax.swing.JDialog {
     private void btnBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarClienteActionPerformed
         if (txtId.getText().isEmpty()) {
             JOptionPane.showMessageDialog(
-                this,
-                "Se requiere el ID del cliente",
-                "Error",
-                JOptionPane.ERROR_MESSAGE
+                    this,
+                    "Se requiere el ID del cliente",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
             );
         } else {
             int pos = clsClienteDAO.posicion(Integer.parseInt(txtId.getText()));
-            
+
             if (pos != -1) {
                 clsCliente objCli = clsClienteDAO.getElemento(Integer.parseInt(txtId.getText()));
                 txtNombre.setText(objCli.getNombre());
                 txtDireccion.setText(objCli.getDireccion());
                 txtTipoCliente.setText(objCli.getTipoCliente());
                 txtDniRuc.setText(String.valueOf(objCli.getDocumento()));
-                
+
                 if (objCli.getTipoComprobante().equalsIgnoreCase("boleta")) {
                     rbtnBoleta.setSelected(true);
                 } else if (objCli.getTipoComprobante().equalsIgnoreCase("factura")) {
@@ -513,10 +513,10 @@ public class jdVenta extends javax.swing.JDialog {
                 }
             } else {
                 JOptionPane.showMessageDialog(
-                this,
-                "ID del cliente no encontrado",
-                "Error",
-                JOptionPane.ERROR_MESSAGE
+                        this,
+                        "ID del cliente no encontrado",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
                 );
             }
         }
@@ -528,8 +528,9 @@ public class jdVenta extends javax.swing.JDialog {
         objAgregar.setVisible(true);
         int producto = objAgregar.getProd();
         int cantidad = objAgregar.getCant();
-        int descuento = objAgregar.getDefaultCloseOperation();
-        
+        //int descuento = objAgregar.getDefaultCloseOperation();
+        int descuento= objAgregar.getDesc();
+
         try {
             agregarProducto(producto, cantidad, descuento);
         } catch (Exception e) {
@@ -560,9 +561,12 @@ public class jdVenta extends javax.swing.JDialog {
         int N = tblDetalle.getRowCount();
         clsVenta objVenta = new clsVenta(numventa, fecha, cliente, subtotal, igv, total, N);
         objVenta.llenarDetalle(tblDetalle);
-        
-        JOptionPane.showMessageDialog(rootPane, "Venta generada --> guardar en contenedor");
-       
+
+        // agregar venta al contenedor
+        if (ContenedorVentas.agregar(objVenta)) {
+            JOptionPane.showMessageDialog(rootPane, "Venta " + ContenedorVentas.getCantidad() + " generado");
+        } else
+            JOptionPane.showMessageDialog(rootPane, "No se pudo registrar la venta. Almacenamiento lleno" );
     }//GEN-LAST:event_btnGuardarVentaActionPerformed
 
     private void tblListadoMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_tblListadoMouseClicked
@@ -572,36 +576,36 @@ public class jdVenta extends javax.swing.JDialog {
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {
         this.dispose();
     }
-    
+
     private void agregarProducto(int codigoProducto, int cantidad, int descuento) {
         if (codigoProducto != 0 && cantidad != 0) {
             try {
                 DefaultTableModel modelo = (DefaultTableModel) tblDetalle.getModel();
                 boolean repetido = false;
                 int fila = -1;
-                
+
                 // busqueda secuencial
-                for (int i=0; i<tblDetalle.getRowCount(); i++) {
+                for (int i = 0; i < tblDetalle.getRowCount(); i++) {
                     if (Integer.parseInt(String.valueOf(tblDetalle.getValueAt(i, 0))) == codigoProducto) {
                         repetido = true;
                         fila = i;
                     }
                 }
-                
-                if ( repetido) {
+
+                if (repetido) {
                     int aux = Integer.parseInt(String.valueOf(tblDetalle.getValueAt(fila, 3)));
                     cantidad += aux;
                     modelo.removeRow(fila);
                 }
-                
+
                 clsProducto objProd = clsProductoDAO.getElemento(codigoProducto);
                 int stock = objProd.getStock();
                 if (cantidad > stock) {
                     cantidad = stock;
                     JOptionPane.showMessageDialog(rootPane, "Stock insuficiente");
                 }
-                
-                modelo.addRow(new Object[] {
+
+                modelo.addRow(new Object[]{
                     objProd.getCodigo(),
                     objProd.getNombre(),
                     objProd.getPrecio(),
@@ -616,30 +620,30 @@ public class jdVenta extends javax.swing.JDialog {
         }
         calcularTotal();
     }
-    
+
     private void calcularTotal() {
         try {
             float subTotal = 0;
-            
-            for (int i=0; i < tblDetalle.getRowCount(); i++) {
+
+            for (int i = 0; i < tblDetalle.getRowCount(); i++) {
                 subTotal += Float.parseFloat(String.valueOf(tblDetalle.getValueAt(i, 6)));
             }
-            
+
             float igv = (float) (subTotal * 0.18);
             txtIgv.setText(String.valueOf(igv));
             txtSubTotal.setText(String.valueOf(subTotal));
             txtTotal.setText(String.valueOf(subTotal + igv));
-            
+
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage());
         }
     }
-    
+
     private void tblDetalleMouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
     }
-    
-    private void llenarTablainicial(){
+
+    private void llenarTablainicial() {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Codigo");
         modelo.addColumn("Nombre");
@@ -650,7 +654,7 @@ public class jdVenta extends javax.swing.JDialog {
         modelo.addColumn("Subtotal");
         tblDetalle.setModel(modelo);
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarProd;
     private javax.swing.JButton btnAnular;
